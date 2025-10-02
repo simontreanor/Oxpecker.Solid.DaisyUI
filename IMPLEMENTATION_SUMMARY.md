@@ -85,7 +85,7 @@ The Oxpecker.Solid.DaisyUI library now implements **ALL 72 main DaisyUI componen
 
 ```fsharp
 // Chat component with all parts
-Chat(start = true) {
+Chat(alignment = AlignStart) {
     ChatImage() {
         img(src = "/avatar.jpg")
     }
@@ -95,7 +95,7 @@ Chat(start = true) {
 }
 
 // Carousel with items
-Carousel(center = true) {
+Carousel(snap = SnapCenter) {
     CarouselItem() { img(src = "/img1.jpg") }
     CarouselItem() { img(src = "/img2.jpg") }
     CarouselItem() { img(src = "/img3.jpg") }
@@ -197,7 +197,7 @@ div(class' = "chat chat-start") {
 
 ### After (using components):
 ```fsharp
-Chat(start = true) {
+Chat(alignment = AlignStart) {
     ChatImage() { Avatar() }
     ChatHeader() { "User" }
     ChatBubble(color = Primary) { "Hello!" }

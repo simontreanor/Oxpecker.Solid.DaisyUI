@@ -19,11 +19,11 @@ All DaisyUI components use **PascalCase** naming to:
 - **CardBody** - `CardBody() { content }`
 - **CardTitle** - `CardTitle() { "Title" }`
 - **CardActions** - `CardActions() { buttons }`
-- **Avatar** - `Avatar(online = true) { img }`
-- **Stats** - `Stats(vertical = true) { stat items }`
+- **Avatar** - `Avatar(status = Online) { img }`
+- **Stats** - `Stats(orientation = Vertical) { stat items }`
 - **Stat** - `Stat() { stat content }`
 - **Table** - `Table(zebra = true) { table content }`
-- **Timeline** - `Timeline(vertical = true) { events }`
+- **Timeline** - `Timeline(orientation = Vertical) { events }`
 
 ### Data Input
 - **Checkbox** - `Checkbox(color = Primary)`
@@ -38,12 +38,12 @@ All DaisyUI components use **PascalCase** naming to:
 
 ### Layout
 - **Artboard** - `Artboard(phone = true) { content }`
-- **Divider** - `Divider(vertical = true)`
+- **Divider** - `Divider(orientation = Vertical)`
 - **Drawer** - `Drawer(isEnd = true) { sidebar }`
 - **Footer** - `Footer(center = true) { content }`
 - **Hero** - `Hero(overlay = true) { hero content }`
 - **Indicator** - `Indicator() { badge content }`
-- **Join** - `Join(vertical = true) { grouped items }`
+- **Join** - `Join(orientation = Vertical) { grouped items }`
 - **Stack** - `Stack() { stacked items }`
 - **Toast** - `Toast(position = TopEnd) { notifications }`
 
@@ -51,9 +51,9 @@ All DaisyUI components use **PascalCase** naming to:
 - **Breadcrumbs** - `Breadcrumbs() { breadcrumb items }`
 - **BottomNav** - `BottomNav(size = Large) { nav items }`
 - **Link** - `Link(hover = true) { "Link text" }`
-- **Menu** - `Menu(horizontal = true) { menu items }`
+- **Menu** - `Menu(orientation = Horizontal) { menu items }`
 - **Navbar** - `Navbar() { nav content }`
-- **Steps** - `Steps(vertical = true) { step items }`
+- **Steps** - `Steps(orientation = Vertical) { step items }`
 - **Step** - `Step(color = Primary) { "Step 1" }`
 - **Tabs** - `Tabs(boxed = true) { tab items }`
 - **Tab** - `Tab(active = true) { "Tab 1" }`

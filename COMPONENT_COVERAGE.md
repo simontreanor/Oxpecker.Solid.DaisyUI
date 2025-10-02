@@ -237,12 +237,12 @@ Mockup/preview components
 
 ```fsharp
 // Before (old pattern)
-Menu(horizontal = true).class'("px-1") {
+Menu(orientation = Horizontal).class'("px-1") {
     // content
 }
 
 // After (new pattern)
-Menu(class' = "px-1", horizontal = true) {
+Menu(class' = "px-1", orientation = Horizontal) {
     // content
 }
 

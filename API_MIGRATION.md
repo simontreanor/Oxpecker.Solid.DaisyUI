@@ -229,7 +229,7 @@ Menu <| Fragment() {
 }
 
 // New
-ul().menu(vertical = true) {
+Menu(orientation = Vertical) {
     li() { a() { "Item 1" } }
     li() { a() { "Item 2" } }
 }

@@ -234,7 +234,7 @@ let AppNavbar() =
             a(class' = "btn btn-ghost text-xl") { "Oxpecker.Solid.DaisyUI" }
         }
         div(class' = "flex-none") {
-            Menu(class' = "px-1", horizontal = true) {
+            Menu(class' = "px-1", orientation = Horizontal) {
                 li() {
                     Link(hover = true).href("#home") { "Home" }
                 }
