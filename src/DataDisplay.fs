@@ -154,3 +154,145 @@ module DataDisplay =
                 if class'.IsSome then class'.Value
             ]
             ul(class' = CssClass.combine classes)
+    
+    /// Chat component - Container for one line of conversation
+    type Chat =
+        [<SolidComponent>]
+        static member Invoke(?class': string, ?start: bool, ?``end``: bool) =
+            let classes = [
+                "chat"
+                if start = Some true then "chat-start"
+                if ``end`` = Some true then "chat-end"
+                if class'.IsSome then class'.Value
+            ]
+            div(class' = CssClass.combine classes)
+    
+    /// Chat image component - Author image in chat
+    type ChatImage =
+        [<SolidComponent>]
+        static member Invoke(?class': string) =
+            let classes = ["chat-image"; if class'.IsSome then class'.Value]
+            div(class' = CssClass.combine classes)
+    
+    /// Chat header component - Text above the chat bubble
+    type ChatHeader =
+        [<SolidComponent>]
+        static member Invoke(?class': string) =
+            let classes = ["chat-header"; if class'.IsSome then class'.Value]
+            div(class' = CssClass.combine classes)
+    
+    /// Chat footer component - Text below the chat bubble
+    type ChatFooter =
+        [<SolidComponent>]
+        static member Invoke(?class': string) =
+            let classes = ["chat-footer"; if class'.IsSome then class'.Value]
+            div(class' = CssClass.combine classes)
+    
+    /// Chat bubble component - The actual chat message bubble
+    type ChatBubble =
+        [<SolidComponent>]
+        static member Invoke(?class': string, ?color: ColorVariant) =
+            let classes = [
+                "chat-bubble"
+                if color.IsSome then CssClass.ofColorVariant "chat-bubble" color.Value
+                if class'.IsSome then class'.Value
+            ]
+            div(class' = CssClass.combine classes)
+    
+    /// Carousel component - Shows images or content in a scrollable area
+    type Carousel =
+        [<SolidComponent>]
+        static member Invoke(?class': string, ?center: bool, ?``end``: bool, ?vertical: bool) =
+            let classes = [
+                "carousel"
+                if center = Some true then "carousel-center"
+                if ``end`` = Some true then "carousel-end"
+                if vertical = Some true then "carousel-vertical"
+                if class'.IsSome then class'.Value
+            ]
+            div(class' = CssClass.combine classes)
+    
+    /// Carousel item component - Item in carousel
+    type CarouselItem =
+        [<SolidComponent>]
+        static member Invoke(?class': string) =
+            let classes = ["carousel-item"; if class'.IsSome then class'.Value]
+            div(class' = CssClass.combine classes)
+    
+    /// Countdown component - Countdown timer with transition effect
+    type Countdown =
+        [<SolidComponent>]
+        static member Invoke(?class': string) =
+            let classes = ["countdown"; if class'.IsSome then class'.Value]
+            span(class' = CssClass.combine classes)
+    
+    /// Diff component - Side-by-side comparison container
+    type Diff =
+        [<SolidComponent>]
+        static member Invoke(?class': string) =
+            let classes = ["diff"; if class'.IsSome then class'.Value]
+            div(class' = CssClass.combine classes)
+    
+    /// Diff item 1 component - First item in diff
+    type DiffItem1 =
+        [<SolidComponent>]
+        static member Invoke(?class': string) =
+            let classes = ["diff-item-1"; if class'.IsSome then class'.Value]
+            div(class' = CssClass.combine classes)
+    
+    /// Diff item 2 component - Second item in diff
+    type DiffItem2 =
+        [<SolidComponent>]
+        static member Invoke(?class': string) =
+            let classes = ["diff-item-2"; if class'.IsSome then class'.Value]
+            div(class' = CssClass.combine classes)
+    
+    /// Diff resizer component - The resizer control in diff
+    type DiffResizer =
+        [<SolidComponent>]
+        static member Invoke(?class': string) =
+            let classes = ["diff-resizer"; if class'.IsSome then class'.Value]
+            div(class' = CssClass.combine classes)
+    
+    /// Mask component - Crops content to common shapes
+    type Mask =
+        [<SolidComponent>]
+        static member Invoke(?class': string, ?variant: string, ?half1: bool, ?half2: bool) =
+            let classes = [
+                "mask"
+                match variant with
+                | Some "squircle" -> "mask-squircle"
+                | Some "heart" -> "mask-heart"
+                | Some "hexagon" -> "mask-hexagon"
+                | Some "hexagon-2" -> "mask-hexagon-2"
+                | Some "decagon" -> "mask-decagon"
+                | Some "pentagon" -> "mask-pentagon"
+                | Some "diamond" -> "mask-diamond"
+                | Some "square" -> "mask-square"
+                | Some "circle" -> "mask-circle"
+                | Some "star" -> "mask-star"
+                | Some "star-2" -> "mask-star-2"
+                | Some "triangle" -> "mask-triangle"
+                | Some "triangle-2" -> "mask-triangle-2"
+                | Some "triangle-3" -> "mask-triangle-3"
+                | Some "triangle-4" -> "mask-triangle-4"
+                | _ -> ""
+                if half1 = Some true then "mask-half-1"
+                if half2 = Some true then "mask-half-2"
+                if class'.IsSome then class'.Value
+            ]
+            div(class' = CssClass.combine classes)
+    
+    /// List component - Vertical layout to display information in rows
+    type List =
+        [<SolidComponent>]
+        static member Invoke(?class': string) =
+            let classes = ["list"; if class'.IsSome then class'.Value]
+            ul(class' = CssClass.combine classes)
+    
+    /// Status component - Small icon showing current status
+    type Status =
+        [<SolidComponent>]
+        static member Invoke(?class': string) =
+            let classes = ["status"; if class'.IsSome then class'.Value]
+            div(class' = CssClass.combine classes)

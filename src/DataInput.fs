@@ -158,3 +158,42 @@ module DataInput =
                 if class'.IsSome then class'.Value
             ]
             div(class' = CssClass.combine classes)
+    
+    /// Kbd component - Display keyboard shortcuts
+    type Kbd =
+        [<SolidComponent>]
+        static member Invoke(?class': string, ?size: Size) =
+            let classes = [
+                "kbd"
+                if size.IsSome then CssClass.ofSize "kbd" size.Value
+                if class'.IsSome then class'.Value
+            ]
+            kbd(class' = CssClass.combine classes)
+    
+    /// Filter component - Group of radio buttons for filtering
+    type Filter =
+        [<SolidComponent>]
+        static member Invoke(?class': string) =
+            let classes = ["filter"; if class'.IsSome then class'.Value]
+            div(class' = CssClass.combine classes)
+    
+    /// Filter reset component - Alternative to reset button (when not using HTML form)
+    type FilterReset =
+        [<SolidComponent>]
+        static member Invoke(?class': string) =
+            let classes = ["filter-reset"; if class'.IsSome then class'.Value]
+            button(class' = CssClass.combine classes)
+    
+    /// Fieldset component - Container for grouping related form elements
+    type Fieldset =
+        [<SolidComponent>]
+        static member Invoke(?class': string) =
+            let classes = ["fieldset"; if class'.IsSome then class'.Value]
+            fieldset(class' = CssClass.combine classes)
+    
+    /// Fieldset legend component - Title for the fieldset
+    type FieldsetLegend =
+        [<SolidComponent>]
+        static member Invoke(?class': string) =
+            let classes = ["fieldset-legend"; if class'.IsSome then class'.Value]
+            legend(class' = CssClass.combine classes)

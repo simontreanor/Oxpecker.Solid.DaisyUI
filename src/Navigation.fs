@@ -129,3 +129,7 @@ module Navigation =
                 if class'.IsSome then class'.Value
             ]
             a(class' = CssClass.combine classes)
+    
+    /// Pagination component - Note: Uses Join component for grouping buttons
+    /// This is just a type alias for better semantics
+    type Pagination = Join
