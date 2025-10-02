@@ -5,36 +5,45 @@ All notable changes to Oxpecker.Solid.DaisyUI will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.0.0] - 2025-10-02
+## [Unreleased]
 
 ### Added
-- Initial release of Oxpecker.Solid.DaisyUI
 - Complete DaisyUI component library for Oxpecker.Solid
-- Type-safe bindings for all major DaisyUI components
-- Six component categories:
-  - **Actions**: Button, Dropdown, Modal, Swap, ThemeController
-  - **Data Display**: Badge, Card, Avatar, Stats, Table, Timeline
-  - **Data Input**: Checkbox, Radio, TextInput, Textarea, Select, Range, Toggle, FileInput, Rating
+- Type-safe F# bindings for all 73 DaisyUI components
+- 37 part types for structured components (ModalBox, CardBody, etc.)
+- Seven component categories:
+  - **Actions**: Button, Dropdown, Modal, Swap, Fab, Collapse, ThemeController
+  - **DataDisplay**: Badge, Card, Avatar, Stats, Table, Timeline, Chat, Carousel, Countdown, Diff, Mask, List, Status
+  - **DataInput**: Checkbox, Radio, TextInput, Textarea, Select, Range, Toggle, FileInput, Rating, Kbd, Filter, Fieldset
   - **Layout**: Artboard, Divider, Drawer, Footer, Hero, Indicator, Join, Stack, Toast
-  - **Navigation**: Breadcrumbs, BottomNav, Link, Menu, Navbar, Pagination, Steps, Tabs
+  - **Navigation**: Breadcrumbs, BottomNav, Link, Menu, Navbar, Steps, Tabs, Pagination
   - **Feedback**: Alert, Loading, Progress, RadialProgress, Skeleton, Tooltip
-- Common type system with ColorVariant, Size, ButtonStyle, Position types
-- Helper modules for CSS class management
+  - **Mockup**: MockupBrowser, MockupCode, MockupPhone, MockupWindow
+- Type-safe discriminated unions:
+  - `ColorVariant`: Primary, Secondary, Accent, Neutral, Info, Success, Warning, Error, Ghost
+  - `Size`: ExtraSmall, Small, Medium, Large, ExtraLarge
+  - `Orientation`: Vertical, Horizontal
+  - `Alignment`: AlignStart, AlignEnd
+  - `AvatarStatus`: Online, Offline
+  - `CarouselSnap`: SnapCenter, SnapEnd
+  - `ModalPosition`: ModalTop, ModalMiddle, ModalBottom
+  - `Position`: Top, Bottom, Left, Right, TopStart, TopEnd, BottomStart, BottomEnd
+- PascalCase naming convention for all components
+- `class'` parameter support on all components for custom styling
+- CSS class composition utilities
+- Full integration with Oxpecker.Solid and SolidJS
 - Comprehensive documentation and examples
-- MIT License
-- Example application demonstrating component usage
 
 ### Features
-- Type-based components (DaisyButton, DaisyModal, etc.) for complex configurations
-- Simple function-based components for common use cases
-- Full integration with Oxpecker.Solid's SolidComponent attribute
-- Support for all DaisyUI color variants and sizes
-- Tailwind CSS class composition utilities
+- Clean component syntax with optional parameters
+- Type safety for component parameters
+- IntelliSense support for all components and variants
+- Seamless Oxpecker.Solid integration via `[<SolidComponent>]` attribute
+- Support for DaisyUI v4+ theming system
+- Works with Tailwind CSS v4+
 
 ### Documentation
-- Complete README with installation and usage guide
-- Component reference guide
-- Example application
-- License file
-
-[1.0.0]: https://github.com/yourusername/Oxpecker.Solid.DaisyUI/releases/tag/v1.0.0
+- Complete README with installation guide
+- Quick start examples
+- Component reference
+- DaisyUI v4 configuration guide

@@ -1,103 +1,89 @@
 # Oxpecker.Solid.DaisyUI - Quick Start Guide
 
-## Overview
-
-Oxpecker.Solid.DaisyUI provides clean, type-safe F# bindings for DaisyUI components in SolidJS applications. The library uses a unique approach with F# types and static `Invoke` members to achieve a clean, function-like syntax with optional parameters.
-
 ## Installation
 
 ```bash
 dotnet add package Oxpecker.Solid.DaisyUI
+npm install -D daisyui@latest tailwindcss@latest
 ```
 
-## Basic Usage
+## Setup
 
-### Import the library
+### 1. Configure Tailwind CSS
+
+Create or update your CSS file (e.g., `src/index.css`):
+
+```css
+@import "tailwindcss";
+
+@plugin "daisyui" {
+  themes: light --default, dark --prefersdark;
+  root: ":root";
+}
+```
+
+### 2. Import the library
 
 ```fsharp
 open Oxpecker.Solid
 open Oxpecker.Solid.DaisyUI
 ```
 
-### Clean Component Syntax
+## Basic Usage
 
-All DaisyUI components are available as standalone functions with optional parameters:
+All components use PascalCase naming and support optional parameters:
 
 ```fsharp
-// Buttons - clean syntax with optional parameters
-Button(color = Primary, size = Large) { "Click me" }
-Button(outline = true) { "Outlined button" }
-
-// Cards
-Card(bordered = true) {
-    CardBody() {
-        CardTitle() { "Card Title" }
-        p() { "Card content goes here" }
+[<SolidComponent>]
+let App() =
+    div(class' = "container mx-auto p-4") {
+        // Button with variants
+        Button(color = Primary, size = Large) { "Click me" }
+        
+        // Card with structure
+        Card(bordered = true) {
+            CardBody() {
+                CardTitle() { "Card Title" }
+                p() { "Card content goes here" }
+            }
+        }
+        
+        // Badge
+        Badge(color = Success) { "New" }
+        
+        // Form inputs
+        FormControl() {
+            Label() {
+                LabelText() { "Your Name" }
+            }
+            TextInput(placeholder = "Enter name", bordered = true)
+        }
     }
-}
-
-// Badges
-Badge(color = Success) { "New" }
-Badge(outline = true, size = Large) { "Badge" }
-
-// Form inputs
-TextInput(placeholder = "Enter name", bordered = true)
-Checkbox(color = Primary)
-Textarea(rows = 4, placeholder = "Message...")
 ```
 
 ## Component Categories
 
 ### Actions
-- `Button` - Buttons with various styles
-- `dropdown` - Dropdown menus
-- `modal` - Modal dialogs
-- `swap` - Swap animations
+- `Button`, `Dropdown`, `Modal`, `Swap`, `Fab`, `Collapse`, `ThemeController`
 
 ### Data Display
-- `Badge` - Status badges
-- `Card`, `cardBody`, `cardTitle` - Card components
-- `avatar` - Avatar images
-- `stats`, `stat` - Statistics display
-- `daisy_table` - Tables
-- `timeline` - Timeline views
+- `Badge`, `Card`, `Avatar`, `Stats`, `Table`, `Timeline`, `Chat`, `Carousel`, `Countdown`, `Diff`, `Mask`, `List`, `Status`
 
 ### Data Input
-- `checkbox` - Checkboxes
-- `radio` - Radio buttons
-- `textInput` - Text inputs
-- `textarea_input` - Text areas
-- `select` - Select dropdowns
-- `range` - Range sliders
-- `toggle` - Toggle switches
-- `fileInput` - File uploads
-- `rating` - Star ratings
+- `Checkbox`, `Radio`, `TextInput`, `Textarea`, `Select`, `Range`, `Toggle`, `FileInput`, `Rating`, `Kbd`, `Filter`, `Fieldset`
+- Form helpers: `FormControl`, `Label`, `LabelText`, `LabelTextAlt`
 
 ### Layout
-- `hero` - Hero sections
-- `divider` - Dividers
-- `drawer` - Drawer sidebars
-- `footer_layout` - Footers
-- `indicator` - Indicators
-- `join` - Joined elements
-- `stack` - Stacked elements
-- `toast` - Toast notifications
+- `Artboard`, `Divider`, `Drawer`, `Footer`, `Hero`, `Indicator`, `Join`, `Stack`, `Toast`
 
 ### Navigation
-- `breadcrumbs` - Breadcrumb navigation
-- `btmNav` - Bottom navigation
-- `link` - Links
-- `menu` - Menus
-- `navbar` - Navigation bars
-- `steps`, `step` - Step indicators
-- `tabs`, `tab` - Tab navigation
+- `Breadcrumbs`, `BottomNav`, `Link`, `Menu`, `Navbar`, `Steps`, `Tabs`, `Pagination`
 
 ### Feedback
-- `alert` - Alert messages
-- `loading` - Loading spinners
-- `progress_bar` - Progress bars
-- `radialProgress` - Radial progress
-- `skeleton` - Skeleton loaders
+- `Alert`, `Loading`, `Progress`, `RadialProgress`, `Skeleton`, `Tooltip`
+
+### Mockup
+- `MockupBrowser`, `MockupCode`, `MockupPhone`, `MockupWindow`
 - `tooltip` - Tooltips
 
 ## Common Parameters
@@ -111,14 +97,27 @@ type ColorVariant =
 
 ### Sizes
 ```fsharp
+## Type-Safe Variants
+
+The library provides discriminated unions for common modifiers:
+
+```fsharp
+type ColorVariant =
+    | Primary | Secondary | Accent | Neutral
+    | Info | Success | Warning | Error | Ghost
+
 type Size =
     | ExtraSmall | Small | Medium | Large | ExtraLarge
+
+type Orientation =
+    | Vertical | Horizontal
 ```
 
 ### Example Usage
 ```fsharp
 Button(color = Primary, size = Large) { "Large Primary Button" }
 Badge(color = Success, size = Small) { "Success" }
+Menu(orientation = Vertical) { ... }
 ```
 
 ## Complete Example
@@ -134,7 +133,7 @@ let MyApp() =
         }
         
         Hero() {
-            div(class' = "hero-content text-center") {
+            HeroContent(class' = "text-center") {
                 div(class' = "max-w-md") {
                     h1(class' = "text-5xl font-bold") { "Welcome!" }
                     p(class' = "py-6") { "Get started with DaisyUI" }
@@ -148,7 +147,7 @@ let MyApp() =
                 CardBody() {
                     CardTitle() { "Example Card" }
                     p() { "This demonstrates the clean API syntax" }
-                    div(class' = "card-actions justify-end") {
+                    CardActions(class' = "justify-end") {
                         Button(color = Primary) { "Action" }
                     }
                 }
@@ -157,39 +156,9 @@ let MyApp() =
     }
 ```
 
-## Key Differences from Standard Oxpecker.Solid
+## More Examples
 
-Instead of chaining methods on HTML elements:
-```fsharp
-// ❌ Old verbose style
-div().Card(bordered = true) { }
-button().Button(color = Primary) { }
-input().Checkbox() { }
-```
-
-Use the clean component syntax:
-```fsharp
-// ✅ New clean style
-Card(bordered = true) { }
-Button(color = Primary) { }
-Checkbox() { }
-```
-
-## Why This Syntax?
-
-F# only allows optional parameters (`?param`) on type members, not on let-bound functions. To achieve clean syntax like `Button(color = Primary)`, we use F# types with static `Invoke` members:
-
-```fsharp
-type btn =
-    [<SolidComponent>]
-    static member Invoke(?color: ColorVariant, ?size: Size, ...) =
-        // Implementation
-```
-
-This gives you the best of both worlds:
-- Clean, intuitive syntax: `Button(color = Primary)`
-- Full IntelliSense support with optional parameters
-- Type safety with compile-time checking
+See the [Component Reference](COMPONENT_REFERENCE.md) for detailed examples of all components.
 
 ## License
 

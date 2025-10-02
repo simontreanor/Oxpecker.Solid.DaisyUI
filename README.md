@@ -102,26 +102,34 @@ let App() =
     }
 ```
 
-### Key Difference: Clean Component Syntax
+## Component Syntax
 
-Oxpecker.Solid.DaisyUI uses a unique approach for clean, intuitive syntax:
+All DaisyUI components use a clean, type-safe syntax with optional parameters:
 
 ```fsharp
-// ✅ Clean syntax - components as functions
-Button(color = Primary) { "Click" }
-Card(bordered = true) { ... }
+// Components use PascalCase and accept optional parameters
+Button(color = Primary, size = Large) { "Click" }
+Card(bordered = true, class' = "shadow-xl") { ... }
 Badge(color = Success) { "New" }
+Alert(color = Info) { "Message" }
 
-// ❌ Not the verbose chaining style
-button().Button(color = Primary) { "Click" }
-div().Card(bordered = true) { ... }
+// Part types for structured components
+Modal(``open`` = true) {
+    ModalBox() {
+        h3() { "Title" }
+        p() { "Content" }
+        ModalAction() {
+            Button() { "Close" }
+        }
+    }
+}
 ```
 
-This is achieved using F# types with static `Invoke` members, giving you:
-- Function-like syntax
-- Full optional parameter support
-- Complete IntelliSense
-- Type safety
+This approach provides:
+- ✅ Clean, readable code
+- ✅ Full IntelliSense support
+- ✅ Type-safe parameters
+- ✅ Optional parameter flexibility
 
 ## Component Categories
 
