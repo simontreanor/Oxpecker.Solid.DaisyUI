@@ -63,6 +63,13 @@ module Layout =
             ]
             div(class' = CssClass.combine classes)
     
+    /// Hero content component - Content area for hero
+    type HeroContent =
+        [<SolidComponent>]
+        static member Invoke(?class': string) =
+            let classes = ["hero-content"; if class'.IsSome then class'.Value]
+            div(class' = CssClass.combine classes)
+    
     /// Indicator component - Badge indicator
     type Indicator =
         [<SolidComponent>]

@@ -6,6 +6,34 @@ open Oxpecker.Solid
 /// DaisyUI Data Input components
 module DataInput =
     
+    /// Form control component - Wrapper for form inputs
+    type FormControl =
+        [<SolidComponent>]
+        static member Invoke(?class': string) =
+            let classes = ["form-control"; if class'.IsSome then class'.Value]
+            div(class' = CssClass.combine classes)
+    
+    /// Label component - Form label
+    type Label =
+        [<SolidComponent>]
+        static member Invoke(?class': string) =
+            let classes = ["label"; if class'.IsSome then class'.Value]
+            label(class' = CssClass.combine classes)
+    
+    /// Label text component - Text for labels
+    type LabelText =
+        [<SolidComponent>]
+        static member Invoke(?class': string) =
+            let classes = ["label-text"; if class'.IsSome then class'.Value]
+            span(class' = CssClass.combine classes)
+    
+    /// Label text alt component - Alternative/helper text for labels
+    type LabelTextAlt =
+        [<SolidComponent>]
+        static member Invoke(?class': string) =
+            let classes = ["label-text-alt"; if class'.IsSome then class'.Value]
+            span(class' = CssClass.combine classes)
+    
     /// Checkbox component - Checkbox input
     type Checkbox =
         [<SolidComponent>]

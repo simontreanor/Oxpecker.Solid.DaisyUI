@@ -93,6 +93,41 @@ module DataDisplay =
             let classes = ["stat"; if class'.IsSome then class'.Value]
             div(class' = CssClass.combine classes)
     
+    /// Stat figure component - Icon or image for the stat
+    type StatFigure =
+        [<SolidComponent>]
+        static member Invoke(?class': string) =
+            let classes = ["stat-figure"; if class'.IsSome then class'.Value]
+            div(class' = CssClass.combine classes)
+    
+    /// Stat title component - Label for the stat
+    type StatTitle =
+        [<SolidComponent>]
+        static member Invoke(?class': string) =
+            let classes = ["stat-title"; if class'.IsSome then class'.Value]
+            div(class' = CssClass.combine classes)
+    
+    /// Stat value component - Main value display
+    type StatValue =
+        [<SolidComponent>]
+        static member Invoke(?class': string) =
+            let classes = ["stat-value"; if class'.IsSome then class'.Value]
+            div(class' = CssClass.combine classes)
+    
+    /// Stat description component - Additional info
+    type StatDesc =
+        [<SolidComponent>]
+        static member Invoke(?class': string) =
+            let classes = ["stat-desc"; if class'.IsSome then class'.Value]
+            div(class' = CssClass.combine classes)
+    
+    /// Stat actions component - Action buttons for the stat
+    type StatActions =
+        [<SolidComponent>]
+        static member Invoke(?class': string) =
+            let classes = ["stat-actions"; if class'.IsSome then class'.Value]
+            div(class' = CssClass.combine classes)
+    
     /// Table component - Data table (no conflict with PascalCase)
     type Table =
         [<SolidComponent>]

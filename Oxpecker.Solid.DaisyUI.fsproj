@@ -21,6 +21,7 @@
     <Compile Include="src/Layout.fs" />
     <Compile Include="src/Navigation.fs" />
     <Compile Include="src/Feedback.fs" />
+    <Compile Include="src/Mockup.fs" />
     <Compile Include="src/Library.fs" />
   </ItemGroup>
 

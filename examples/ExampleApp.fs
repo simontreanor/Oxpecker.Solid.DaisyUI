@@ -8,12 +8,13 @@ open Oxpecker.Solid.DaisyUI.DataInput
 open Oxpecker.Solid.DaisyUI.Feedback
 open Oxpecker.Solid.DaisyUI.Navigation
 open Oxpecker.Solid.DaisyUI.Layout
+open Oxpecker.Solid.DaisyUI.Mockup
 
 /// Hero section with title and description
 [<SolidComponent>]
 let HeroSection() =
     Hero() {
-        div(class' = "hero-content text-center") {
+        HeroContent(class' = "text-center") {
             div(class' = "max-w-md") {
                 h1(class' = "text-5xl font-bold") { "Hello DaisyUI!" }
                 p(class' = "py-6") {
@@ -31,24 +32,24 @@ let HeroSection() =
 let StatsSection() =
     Stats(class' = "shadow w-full") {
         Stat() {
-            div(class' = "stat-figure text-primary") {
+            StatFigure(class' = "text-primary") {
                 svg(class' = "w-8 h-8") { }
             }
-            div(class' = "stat-title") { "Downloads" }
-            div(class' = "stat-value text-primary") { "31K" }
-            div(class' = "stat-desc") { "Jan 1st - Feb 1st" }
+            StatTitle() { "Downloads" }
+            StatValue(class' = "text-primary") { "31K" }
+            StatDesc() { "Jan 1st - Feb 1st" }
         }
         
         Stat() {
-            div(class' = "stat-title") { "New Users" }
-            div(class' = "stat-value text-secondary") { "4,200" }
-            div(class' = "stat-desc") { "↗︎ 400 (22%)" }
+            StatTitle() { "New Users" }
+            StatValue(class' = "text-secondary") { "4,200" }
+            StatDesc() { "↗︎ 400 (22%)" }
         }
         
         Stat() {
-            div(class' = "stat-title") { "New Registers" }
-            div(class' = "stat-value") { "1,200" }
-            div(class' = "stat-desc") { "↘︎ 90 (14%)" }
+            StatTitle() { "New Registers" }
+            StatValue() { "1,200" }
+            StatDesc() { "↘︎ 90 (14%)" }
         }
     }
 
@@ -64,19 +65,19 @@ let ModalExample() =
         
         // Modal with backdrop
         Show(``when`` = isOpen) <| Fragment() {
-            Modal(isOpen = isOpen()).attr("open", "true") {
-                div(class' = "modal-box") {
+            Modal(``open`` = isOpen()).attr("open", "true") {
+                ModalBox() {
                     h3(class' = "font-bold text-lg") { "Congratulations!" }
                     p(class' = "py-4") {
                         "You've opened a modal using Oxpecker.Solid.DaisyUI"
                     }
-                    div(class' = "modal-action") {
+                    ModalAction() {
                         Button().onClick(fun _ -> setIsOpen(false)) {
                             "Close"
                         }
                     }
                 }
-                form(class' = "modal-backdrop").attr("method", "dialog") {
+                ModalBackdrop().attr("method", "dialog") {
                     button().onClick(fun _ -> setIsOpen(false)) { }
                 }
             }
@@ -115,8 +116,8 @@ let CardGrid() =
                 CardTitle() { "Quick Stats" }
                 Stats() {
                     Stat() {
-                        div(class' = "stat-value text-primary") { "89%" }
-                        div(class' = "stat-desc") { "Task completion" }
+                        StatValue(class' = "text-primary") { "89%" }
+                        StatDesc() { "Task completion" }
                     }
                 }
             }
@@ -135,35 +136,92 @@ let FormExample() =
             CardTitle() { "Contact Form" }
             
             form(class' = "space-y-4") {
-                div(class' = "form-control") {
-                    label(class' = "label") {
-                        span(class' = "label-text") { "Name" }
+                FormControl() {
+                    Label() {
+                        LabelText() { "Name" }
                     }
                     TextInput(placeholder = "Your name", bordered = true)
                 }
                 
-                div(class' = "form-control") {
-                    label(class' = "label") {
-                        span(class' = "label-text") { "Email" }
+                FormControl() {
+                    Label() {
+                        LabelText() { "Email" }
                     }
                     TextInput(placeholder = "your@email.com", bordered = true, color = Primary)
                 }
                 
-                div(class' = "form-control") {
-                    label(class' = "label") {
-                        span(class' = "label-text") { "Message" }
+                FormControl() {
+                    Label() {
+                        LabelText() { "Message" }
                     }
                     Textarea(placeholder = "Your message here...", bordered = true, rows = 4)
                 }
                 
-                div(class' = "form-control") {
-                    label(class' = "label cursor-pointer justify-start gap-2") {
+                FormControl() {
+                    Label(class' = "cursor-pointer justify-start gap-2") {
                         Checkbox(color = Primary)
-                        span(class' = "label-text") { "Subscribe to newsletter" }
+                        LabelText() { "Subscribe to newsletter" }
                     }
                 }
                 
                 Button(color = Primary, block = true) { "Submit" }
+            }
+        }
+    }
+
+/// Mockup examples
+[<SolidComponent>]
+let MockupExamples() =
+    div(class' = "grid grid-cols-1 md:grid-cols-2 gap-4") {
+        // Browser mockup
+        div() {
+            h3(class' = "text-lg font-bold mb-2") { "Browser Mockup" }
+            MockupBrowser(class' = "border bg-base-300") {
+                MockupBrowserToolbar() {
+                    div(class' = "input") { "https://daisyui.com" }
+                }
+                div(class' = "bg-base-200 flex justify-center px-4 py-16") {
+                    "Hello from DaisyUI!"
+                }
+            }
+        }
+        
+        // Code mockup
+        div() {
+            h3(class' = "text-lg font-bold mb-2") { "Code Mockup" }
+            MockupCode(class' = "bg-primary text-primary-content") {
+                pre().attr("data-prefix", "$") {
+                    code() { "npm i daisyui" }
+                }
+                pre().attr("data-prefix", ">").attr("class", "text-warning") {
+                    code() { "installing..." }
+                }
+                pre().attr("data-prefix", ">").attr("class", "text-success") {
+                    code() { "Done!" }
+                }
+            }
+        }
+        
+        // Window mockup
+        div() {
+            h3(class' = "text-lg font-bold mb-2") { "Window Mockup" }
+            MockupWindow(class' = "border bg-base-300") {
+                div(class' = "bg-base-200 flex justify-center px-4 py-16") {
+                    "Hello from Window!"
+                }
+            }
+        }
+        
+        // Phone mockup
+        div() {
+            h3(class' = "text-lg font-bold mb-2") { "Phone Mockup" }
+            MockupPhone() {
+                MockupPhoneCamera() { }
+                MockupPhoneDisplay() {
+                    div(class' = "bg-base-200 flex justify-center items-center h-full") {
+                        "It's Glowtime"
+                    }
+                }
             }
         }
     }
@@ -208,11 +266,12 @@ let App() =
                 Dropdown() {
                     Button(color = Secondary).attr("tabindex", "0") { "Open Dropdown" }
                     
-                    ul(class' = "dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow")
-                       .attr("tabindex", "0") {
-                        li() { a() { "Item 1" } }
-                        li() { a() { "Item 2" } }
-                        li() { a() { "Item 3" } }
+                    DropdownContent(class' = "menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow") {
+                        ul().attr("tabindex", "0") {
+                            li() { a() { "Item 1" } }
+                            li() { a() { "Item 2" } }
+                            li() { a() { "Item 3" } }
+                        }
                     }
                 }
             }
@@ -220,6 +279,8 @@ let App() =
             CardGrid()
             
             FormExample()
+            
+            MockupExamples()
             
             Footer(class' = "p-4", center = true) {
                 div() {
