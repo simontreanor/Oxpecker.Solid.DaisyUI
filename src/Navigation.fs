@@ -6,60 +6,26 @@ open Oxpecker.Solid
 /// DaisyUI Navigation components
 module Navigation =
     
-    /// Div navigation extensions
-    type div with
-        /// Apply breadcrumbs styles
-        [<Erase>]
-        member this.breadcrumbs() =
-            this.class' <- "breadcrumbs"
-            this
-        
-        /// Apply bottom navigation styles
-        [<Erase>]
-        member this.btmNav(?size: Size) =
+    /// Breadcrumbs component
+    type breadcrumbs =
+        [<SolidComponent>]
+        static member Invoke() =
+            div(class' = "breadcrumbs")
+    
+    /// Bottom navigation component
+    type btmNav =
+        [<SolidComponent>]
+        static member Invoke(?size: Size) =
             let classes = [
                 "btm-nav"
-                if size.IsSome then
-                    match size.Value with
-                    | ExtraSmall -> "btm-nav-xs"
-                    | Small -> "btm-nav-sm"
-                    | Medium -> "btm-nav-md"
-                    | Large -> "btm-nav-lg"
-                    | _ -> ""
+                if size.IsSome then CssClass.ofSize "btm-nav" size.Value
             ]
-            this.class' <- CssClass.combine classes
-            this
-        
-        /// Apply navbar styles
-        [<Erase>]
-        member this.navbar() =
-            this.class' <- "navbar bg-base-100"
-            this
-        
-        /// Apply tabs styles
-        [<Erase>]
-        member this.tabs(?boxed: bool, ?lifted: bool, ?bordered: bool, ?size: Size) =
-            let classes = [
-                "tabs"
-                if boxed = Some true then "tabs-boxed"
-                if lifted = Some true then "tabs-lifted"
-                if bordered = Some true then "tabs-bordered"
-                if size.IsSome then
-                    match size.Value with
-                    | ExtraSmall -> "tabs-xs"
-                    | Small -> "tabs-sm"
-                    | Medium -> "tabs-md"
-                    | Large -> "tabs-lg"
-                    | _ -> ""
-            ]
-            this.class' <- CssClass.combine classes
-            this
+            div(class' = CssClass.combine classes)
     
-    /// Link extensions
-    type a with
-        /// Apply link styles
-        [<Erase>]
-        member this.link(?color: ColorVariant, ?hover: bool) =
+    /// Link component
+    type link =
+        [<SolidComponent>]
+        static member Invoke(?color: ColorVariant, ?hover: bool) =
             let classes = [
                 "link"
                 if hover = Some true then "link-hover"
@@ -75,56 +41,41 @@ module Navigation =
                     | Error -> "link-error"
                     | _ -> ""
             ]
-            this.class' <- CssClass.combine classes
-            this
-        
-        /// Apply tab styles
-        [<Erase>]
-        member this.tab(?active: bool, ?disabled: bool) =
-            let classes = [
-                "tab"
-                if active = Some true then "tab-active"
-                if disabled = Some true then "tab-disabled"
-            ]
-            this.class' <- CssClass.combine classes
-            this
+            a(class' = CssClass.combine classes)
     
-    /// Menu extensions
-    type ul with
-        /// Apply menu styles
-        [<Erase>]
-        member this.menu(?vertical: bool, ?horizontal: bool, ?size: Size) =
+    /// Menu component
+    type menu =
+        [<SolidComponent>]
+        static member Invoke(?vertical: bool, ?horizontal: bool, ?size: Size) =
             let classes = [
                 "menu"
                 if vertical = Some true then "menu-vertical"
                 if horizontal = Some true then "menu-horizontal"
-                if size.IsSome then
-                    match size.Value with
-                    | ExtraSmall -> "menu-xs"
-                    | Small -> "menu-sm"
-                    | Medium -> "menu-md"
-                    | Large -> "menu-lg"
-                    | _ -> ""
+                if size.IsSome then CssClass.ofSize "menu" size.Value
             ]
-            this.class' <- CssClass.combine classes
-            this
-        
-        /// Apply steps styles
-        [<Erase>]
-        member this.steps(?vertical: bool, ?horizontal: bool) =
+            ul(class' = CssClass.combine classes)
+    
+    /// Navbar component
+    type navbar =
+        [<SolidComponent>]
+        static member Invoke() =
+            div(class' = "navbar bg-base-100")
+    
+    /// Steps component
+    type steps =
+        [<SolidComponent>]
+        static member Invoke(?vertical: bool, ?horizontal: bool) =
             let classes = [
                 "steps"
                 if vertical = Some true then "steps-vertical"
                 if horizontal = Some true then "steps-horizontal"
             ]
-            this.class' <- CssClass.combine classes
-            this
+            ul(class' = CssClass.combine classes)
     
-    /// Step item extensions
-    type li with
-        /// Apply step styles
-        [<Erase>]
-        member this.step(?color: ColorVariant) =
+    /// Step item component
+    type step =
+        [<SolidComponent>]
+        static member Invoke(?color: ColorVariant) =
             let classes = [
                 "step"
                 if color.IsSome then
@@ -138,5 +89,28 @@ module Navigation =
                     | Error -> "step-error"
                     | _ -> ""
             ]
-            this.class' <- CssClass.combine classes
-            this
+            li(class' = CssClass.combine classes)
+    
+    /// Tabs component
+    type tabs =
+        [<SolidComponent>]
+        static member Invoke(?boxed: bool, ?lifted: bool, ?bordered: bool, ?size: Size) =
+            let classes = [
+                "tabs"
+                if boxed = Some true then "tabs-boxed"
+                if lifted = Some true then "tabs-lifted"
+                if bordered = Some true then "tabs-bordered"
+                if size.IsSome then CssClass.ofSize "tabs" size.Value
+            ]
+            div(class' = CssClass.combine classes)
+    
+    /// Tab item component
+    type tab =
+        [<SolidComponent>]
+        static member Invoke(?active: bool, ?disabled: bool) =
+            let classes = [
+                "tab"
+                if active = Some true then "tab-active"
+                if disabled = Some true then "tab-disabled"
+            ]
+            a(class' = CssClass.combine classes)

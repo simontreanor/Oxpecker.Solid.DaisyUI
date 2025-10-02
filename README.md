@@ -60,108 +60,127 @@ module App
 
 open Oxpecker.Solid
 open Oxpecker.Solid.DaisyUI
-open Oxpecker.Solid.DaisyUI.Actions
-open Oxpecker.Solid.DaisyUI.DataDisplay
-open Oxpecker.Solid.DaisyUI.Feedback
 
 [<SolidComponent>]
 let App() =
     div().class'("container mx-auto p-4") {
-        // DaisyUI Card with Button
-        div().card(bordered = true) {
-            div().class'("card-body") {
-                h2().cardTitle() { "Welcome to DaisyUI!" }
+        // DaisyUI Card with Button - Clean syntax!
+        card(bordered = true) {
+            cardBody() {
+                cardTitle() { "Welcome to DaisyUI!" }
                 p() { "This is a card component built with Oxpecker.Solid.DaisyUI" }
                 
                 // Clean button syntax with optional parameters
-                button().btn(color = Primary, size = Large) {
+                btn(color = Primary, size = Large) {
                     "Click Me!"
                 }
             }
         }
         
         // Alert component
-        div().alert(color = Success) {
+        alert(color = Success) {
             span() { "✓ Your application is ready!" }
         }
     }
 ```
 
+### Key Difference: Clean Component Syntax
+
+Oxpecker.Solid.DaisyUI uses a unique approach for clean, intuitive syntax:
+
+```fsharp
+// ✅ Clean syntax - components as functions
+btn(color = Primary) { "Click" }
+card(bordered = true) { ... }
+badge(color = Success) { "New" }
+
+// ❌ Not the verbose chaining style
+button().btn(color = Primary) { "Click" }
+div().card(bordered = true) { ... }
+```
+
+This is achieved using F# types with static `Invoke` members, giving you:
+- Function-like syntax
+- Full optional parameter support
+- Complete IntelliSense
+- Type safety
+
 ## Component Categories
 
 ### Actions
-Components for user interactions using clean extension methods:
-- **button().btn()** - Buttons with various styles and colors
-- **div().dropdown()** - Dropdown menus (use with dropdown classes)
-- **dialog().modal()** - Modal dialogs
-- **label().swap()** - Swap/toggle animations
-- **input().themeController()** - Theme switching control
+Interactive components with clean syntax:
+- **btn** - Buttons with various styles and colors
+- **dropdown** - Dropdown menus
+- **modal** - Modal dialogs
+- **swap** - Swap/toggle animations
+- **themeController** - Theme switching control
 
 ### Data Display
 Components for showing data:
-- **span().badge()** - Small status indicators
-- **div().card()** - Content containers
-- **h2().cardTitle()** - Card titles
-- **div().avatar()** - User profile images
-- **div().stat() / div().stats()** - Statistics display
-- **table().table()** - Data tables
-- **ul().timeline()** - Event timelines
+- **badge** - Small status indicators
+- **card** - Content containers
+- **cardTitle** - Card titles
+- **cardBody** - Card body sections
+- **avatar** - User profile images
+- **stat / stats** - Statistics display
+- **daisy_table** - Data tables
+- **timeline** - Event timelines
 
 ### Data Input
 Form input components:
-- **input().checkbox()** - Checkbox inputs
-- **input().radio()** - Radio button inputs
-- **input().textInput()** - Text input fields
-- **textarea().textarea()** - Multi-line text areas
-- **select().select()** - Dropdown selects
-- **input().range()** - Range sliders
-- **input().toggle()** - Toggle switches
-- **input().fileInput()** - File upload inputs
-- **div().rating()** - Star ratings
+- **checkbox** - Checkbox inputs
+- **radio** - Radio button inputs
+- **textInput** - Text input fields
+- **textarea_input** - Multi-line text areas
+- **select** - Dropdown selects
+- **range** - Range sliders
+- **toggle** - Toggle switches
+- **fileInput** - File upload inputs
+- **rating** - Star ratings
 
 ### Layout
 Page layout components:
-- **div().artboard()** - Mobile mockup frames
-- **div().divider()** - Content dividers
-- **div().drawer()** - Side drawers
-- **footer().footer()** - Page footers
-- **div().hero()** - Hero sections
-- **div().indicator()** - Badge indicators
-- **div().join()** - Grouped items
-- **div().stack()** - Stacked items
-- **div().toast()** - Toast notifications
+- **artboard** - Mobile mockup frames
+- **divider** - Content dividers
+- **drawer** - Side drawers
+- **footer_layout** - Page footers
+- **hero** - Hero sections
+- **indicator** - Badge indicators
+- **join** - Grouped items
+- **stack** - Stacked items
+- **toast** - Toast notifications
 
 ### Navigation
 Navigation components:
-- **div().breadcrumbs()** - Breadcrumb navigation
-- **div().btmNav()** - Bottom navigation bars
-- **a().link()** - Styled links
-- **ul().menu()** - Menu lists
-- **div().navbar()** - Navigation bars
-- **ul().steps()** - Step indicators
-- **li().step()** - Individual step items
-- **div().tabs()** - Tab navigation
-- **a().tab()** - Individual tab items
+- **breadcrumbs** - Breadcrumb navigation
+- **btmNav** - Bottom navigation bars
+- **link** - Styled links
+- **menu** - Menu lists
+- **navbar** - Navigation bars
+- **steps** - Step indicators
+- **step** - Individual step items
+- **tabs** - Tab navigation
+- **tab** - Individual tab items
 
 ### Feedback
 User feedback components:
-- **div().alert()** - Alert messages
-- **span().loading()** - Loading spinners
-- **progress().progress()** - Progress bars
-- **div().radialProgress()** - Circular progress
-- **div().skeleton()** - Loading placeholders
-- **div().tooltip()** - Hover tooltips
+- **alert** - Alert messages
+- **loading** - Loading spinners
+- **progress_bar** - Progress bars
+- **radialProgress** - Circular progress
+- **skeleton** - Loading placeholders
+- **tooltip** - Hover tooltips
 
 ## Component Usage Examples
 
 ### Button with Custom Styling
 
 ```fsharp
-open Oxpecker.Solid.DaisyUI.Actions
+open Oxpecker.Solid.DaisyUI
 
 [<SolidComponent>]
 let MyButton() =
-    button().btn(color = Primary, size = Large, wide = true) {
+    btn(color = Primary, size = Large, wide = true) {
         "Large Primary Button"
     }
 ```
@@ -170,7 +189,7 @@ let MyButton() =
 
 ```fsharp
 open Oxpecker.Solid
-open Oxpecker.Solid.DaisyUI.Actions
+open Oxpecker.Solid.DaisyUI
 
 [<SolidComponent>]
 let MyModal() =
@@ -178,19 +197,20 @@ let MyModal() =
     
     Fragment() {
         // Trigger button
-        button().btn(color = Primary).onClick(fun _ -> setIsOpen(not (isOpen()))) {
+        btn(color = Primary).onClick(fun _ -> setIsOpen(not (isOpen()))) {
             "Open Modal"
         }
         
         // Modal
         Show(``when`` = isOpen) <| Fragment() {
-            dialog().modal(isOpen = isOpen()).attr("open", "true") {
+            modal(isOpen = isOpen()).attr("open", "true") {
                 div().class'("modal-box") {
                     h3().class'("font-bold text-lg") { "Hello!" }
                     p().class'("py-4") { "This is a modal dialog" }
                     div().class'("modal-action") {
-                        button().btn().onClick(fun _ -> setIsOpen(false)) {
+                        btn().onClick(fun _ -> setIsOpen(false)) {
                             "Close"
+                        }
                     }
                 }
             }
@@ -201,21 +221,21 @@ let MyModal() =
 ### Card with Stats
 
 ```fsharp
-open Oxpecker.Solid.DaisyUI.DataDisplay
+open Oxpecker.Solid.DaisyUI
 
 [<SolidComponent>]
 let StatsCard() =
-    div().card(bordered = true) {
-        div().class'("card-body") {
-            h2().cardTitle() { "Statistics" }
+    card(bordered = true) {
+        cardBody() {
+            cardTitle() { "Statistics" }
             
-            div().stats() {
-                div().stat() {
+            stats() {
+                stat() {
                     div().class'("stat-title") { "Total Users" }
                     div().class'("stat-value") { "25.6K" }
                     div().class'("stat-desc") { "↗︎ 400 (22%)" }
                 }
-                div().stat() {
+                stat() {
                     div().class'("stat-title") { "Page Views" }
                     div().class'("stat-value") { "2.6M" }
                     div().class'("stat-desc") { "↗︎ 90 (14%)" }
@@ -228,7 +248,7 @@ let StatsCard() =
 ### Form with Inputs
 
 ```fsharp
-open Oxpecker.Solid.DaisyUI.DataInput
+open Oxpecker.Solid.DaisyUI
 
 [<SolidComponent>]
 let MyForm() =
@@ -240,13 +260,13 @@ let MyForm() =
             label().class'("label") {
                 span().class'("label-text") { "Your Name" }
             }
-            input().textInput(placeholder = "Enter your name", bordered = true)
+            textInput(placeholder = "Enter your name", bordered = true)
         }
         
         div().class'("form-control") {
             label().class'("label cursor-pointer") {
                 span().class'("label-text") { "I agree to terms" }
-                input().checkbox(color = Primary)
+                checkbox(color = Primary)
             }
         }
         
@@ -254,14 +274,14 @@ let MyForm() =
             label().class'("label") {
                 span().class'("label-text") { "Select option" }
             }
-            select().select(bordered = true) {
+            select(bordered = true) {
                 option() { "Option 1" }
                 option() { "Option 2" }
                 option() { "Option 3" }
             }
         }
         
-        button().btn(color = Primary, block = true) {
+        btn(color = Primary, block = true) {
             "Submit"
         }
     }

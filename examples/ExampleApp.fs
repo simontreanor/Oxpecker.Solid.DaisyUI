@@ -12,14 +12,14 @@ open Oxpecker.Solid.DaisyUI.Layout
 /// Hero section with title and description
 [<SolidComponent>]
 let HeroSection() =
-    div().hero() {
+    hero() {
         div().class'("hero-content text-center") {
             div().class'("max-w-md") {
                 h1().class'("text-5xl font-bold") { "Hello DaisyUI!" }
                 p().class'("py-6") {
                     "Welcome to Oxpecker.Solid.DaisyUI - Build beautiful UIs with F# and DaisyUI"
                 }
-                button().btn(color = Primary, size = Large) {
+                btn(color = Primary, size = Large) {
                     "Get Started"
                 }
             }
@@ -29,8 +29,8 @@ let HeroSection() =
 /// Stats showcase
 [<SolidComponent>]
 let StatsSection() =
-    div().stats().class'("shadow w-full") {
-        div().stat() {
+    stats().class'("shadow w-full") {
+        stat() {
             div().class'("stat-figure text-primary") {
                 svg().class'("w-8 h-8") { }
             }
@@ -39,13 +39,13 @@ let StatsSection() =
             div().class'("stat-desc") { "Jan 1st - Feb 1st" }
         }
         
-        div().stat() {
+        stat() {
             div().class'("stat-title") { "New Users" }
             div().class'("stat-value text-secondary") { "4,200" }
             div().class'("stat-desc") { "↗︎ 400 (22%)" }
         }
         
-        div().stat() {
+        stat() {
             div().class'("stat-title") { "New Registers" }
             div().class'("stat-value") { "1,200" }
             div().class'("stat-desc") { "↘︎ 90 (14%)" }
@@ -58,20 +58,20 @@ let ModalExample() =
     let isOpen, setIsOpen = createSignal false
     
     Fragment() {
-        button().btn(color = Primary).onClick(fun _ -> setIsOpen(true)) {
+        btn(color = Primary).onClick(fun _ -> setIsOpen(true)) {
             "Open Modal"
         }
         
         // Modal with backdrop
         Show(``when`` = isOpen) <| Fragment() {
-            dialog().modal(isOpen = isOpen()).attr("open", "true") {
+            modal(isOpen = isOpen()).attr("open", "true") {
                 div().class'("modal-box") {
                     h3().class'("font-bold text-lg") { "Congratulations!" }
                     p().class'("py-4") {
                         "You've opened a modal using Oxpecker.Solid.DaisyUI"
                     }
                     div().class'("modal-action") {
-                        button().btn().onClick(fun _ -> setIsOpen(false)) {
+                        btn().onClick(fun _ -> setIsOpen(false)) {
                             "Close"
                         }
                     }
@@ -88,33 +88,33 @@ let ModalExample() =
 let CardGrid() =
     div().class'("grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4") {
         // Card 1: Basic Info
-        div().card(bordered = true) {
-            div().class'("card-body") {
-                h2().cardTitle() { "Basic Card" }
+        card(bordered = true) {
+            cardBody() {
+                cardTitle() { "Basic Card" }
                 p() { "This is a simple card component with title and text." }
                 div().class'("card-actions justify-end") {
-                    button().btn(color = Primary, size = Small) { "Learn More" }
+                    btn(color = Primary, size = Small) { "Learn More" }
                 }
             }
         }
         
         // Card 2: With Badge
-        div().card(bordered = true) {
-            div().class'("card-body") {
-                h2().cardTitle() {
+        card(bordered = true) {
+            cardBody() {
+                cardTitle() {
                     span() { "Featured" }
-                    span().badge(color = Accent) { "NEW" }
+                    badge(color = Accent) { "NEW" }
                 }
                 p() { "Check out our latest features and updates." }
             }
         }
         
         // Card 3: With Stats
-        div().card(color = Primary) {
-            div().class'("card-body") {
-                h2().cardTitle() { "Quick Stats" }
-                div().stats() {
-                    div().stat() {
+        card(color = Primary) {
+            cardBody() {
+                cardTitle() { "Quick Stats" }
+                stats() {
+                    stat() {
                         div().class'("stat-value text-primary") { "89%" }
                         div().class'("stat-desc") { "Task completion" }
                     }
@@ -130,40 +130,40 @@ let FormExample() =
     let email, setEmail = createSignal ""
     let message, setMessage = createSignal ""
     
-    div().card(bordered = true) {
-        div().class'("card-body") {
-            h2().cardTitle() { "Contact Form" }
+    card(bordered = true) {
+        cardBody() {
+            cardTitle() { "Contact Form" }
             
             form().class'("space-y-4") {
                 div().class'("form-control") {
                     label().class'("label") {
                         span().class'("label-text") { "Name" }
                     }
-                    input().textInput(placeholder = "Your name", bordered = true)
+                    textInput(placeholder = "Your name", bordered = true)
                 }
                 
                 div().class'("form-control") {
                     label().class'("label") {
                         span().class'("label-text") { "Email" }
                     }
-                    input().textInput(placeholder = "your@email.com", bordered = true, color = Primary)
+                    textInput(placeholder = "your@email.com", bordered = true, color = Primary)
                 }
                 
                 div().class'("form-control") {
                     label().class'("label") {
                         span().class'("label-text") { "Message" }
                     }
-                    textarea().textarea(placeholder = "Your message here...", bordered = true, rows = 4)
+                    textarea_input(placeholder = "Your message here...", bordered = true, rows = 4)
                 }
                 
                 div().class'("form-control") {
                     label().class'("label cursor-pointer justify-start gap-2") {
-                        input().checkbox(color = Primary)
+                        checkbox(color = Primary)
                         span().class'("label-text") { "Subscribe to newsletter" }
                     }
                 }
                 
-                button().btn(color = Primary, block = true) { "Submit" }
+                btn(color = Primary, block = true) { "Submit" }
             }
         }
     }
@@ -171,20 +171,20 @@ let FormExample() =
 /// Navigation bar
 [<SolidComponent>]
 let AppNavbar() =
-    div().navbar() {
+    navbar() {
         div().class'("flex-1") {
             a().class'("btn btn-ghost text-xl") { "Oxpecker.Solid.DaisyUI" }
         }
         div().class'("flex-none") {
-            ul().menu(horizontal = true).class'("px-1") {
+            menu(horizontal = true).class'("px-1") {
                 li() {
-                    a().link(hover = true).href("#home") { "Home" }
+                    link(hover = true).href("#home") { "Home" }
                 }
                 li() {
-                    a().link(hover = true).href("#docs") { "Docs" }
+                    link(hover = true).href("#docs") { "Docs" }
                 }
                 li() {
-                    a().link(hover = true).href("#examples") { "Examples" }
+                    link(hover = true).href("#examples") { "Examples" }
                 }
             }
         }
@@ -205,8 +205,8 @@ let App() =
                 ModalExample()
                 
                 // Dropdown example
-                div().class'("dropdown") {
-                    button().btn(color = Secondary).attr("tabindex", "0") { "Open Dropdown" }
+                dropdown() {
+                    btn(color = Secondary).attr("tabindex", "0") { "Open Dropdown" }
                     
                     ul().class'("dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow")
                        .attr("tabindex", "0") {
@@ -221,15 +221,15 @@ let App() =
             
             FormExample()
             
-            footer().footer(center = true).class'("p-4") {
+            footer_layout(center = true).class'("p-4") {
                 div() {
                     p() { "Built with Oxpecker.Solid.DaisyUI ❤️" }
                 }
             }
         }
         
-        div().toast(position = TopEnd) {
-            div().alert(color = Success) {
+        toast(position = TopEnd) {
+            alert(color = Success) {
                 span() { "✓ App loaded successfully!" }
             }
         }

@@ -6,76 +6,85 @@ open Oxpecker.Solid
 /// DaisyUI Layout components
 module Layout =
     
-    /// Div layout extensions
-    type div with
-        /// Apply artboard styles
-        [<Erase>]
-        member this.artboard(?phone: bool, ?horizontal: bool) =
+    /// Artboard component
+    type artboard =
+        [<SolidComponent>]
+        static member Invoke(?phone: bool, ?horizontal: bool) =
             let classes = [
                 "artboard"
                 if phone = Some true then "artboard-demo phone-1"
                 if horizontal = Some true then "artboard-horizontal"
             ]
-            this.class' <- CssClass.combine classes
-            this
-        
-        /// Apply divider styles
-        [<Erase>]
-        member this.divider(?vertical: bool, ?horizontal: bool) =
+            div(class' = CssClass.combine classes)
+    
+    /// Divider component
+    type divider =
+        [<SolidComponent>]
+        static member Invoke(?vertical: bool, ?horizontal: bool) =
             let classes = [
                 "divider"
                 if vertical = Some true then "divider-vertical"
                 if horizontal = Some true then "divider-horizontal"
             ]
-            this.class' <- CssClass.combine classes
-            this
-        
-        /// Apply drawer styles
-        [<Erase>]
-        member this.drawer(?isEnd: bool) =
+            div(class' = CssClass.combine classes)
+    
+    /// Drawer component
+    type drawer =
+        [<SolidComponent>]
+        static member Invoke(?isEnd: bool) =
             let classes = [
                 "drawer"
                 if isEnd = Some true then "drawer-end"
             ]
-            this.class' <- CssClass.combine classes
-            this
-        
-        /// Apply hero styles
-        [<Erase>]
-        member this.hero(?overlay: bool) =
+            div(class' = CssClass.combine classes)
+    
+    /// Footer component
+    type footer_layout =
+        [<SolidComponent>]
+        static member Invoke(?center: bool) =
+            let classes = [
+                "footer"
+                if center = Some true then "footer-center"
+            ]
+            footer(class' = CssClass.combine classes)
+    
+    /// Hero component
+    type hero =
+        [<SolidComponent>]
+        static member Invoke(?overlay: bool) =
             let classes = [
                 "hero"
                 if overlay = Some true then "hero-overlay"
             ]
-            this.class' <- CssClass.combine classes
-            this
-        
-        /// Apply indicator styles
-        [<Erase>]
-        member this.indicator() =
-            this.class' <- "indicator"
-            this
-        
-        /// Apply join styles
-        [<Erase>]
-        member this.join(?vertical: bool, ?horizontal: bool) =
+            div(class' = CssClass.combine classes)
+    
+    /// Indicator component
+    type indicator =
+        [<SolidComponent>]
+        static member Invoke() =
+            div(class' = "indicator")
+    
+    /// Join component
+    type join =
+        [<SolidComponent>]
+        static member Invoke(?vertical: bool, ?horizontal: bool) =
             let classes = [
                 "join"
                 if vertical = Some true then "join-vertical"
                 if horizontal = Some true then "join-horizontal"
             ]
-            this.class' <- CssClass.combine classes
-            this
-        
-        /// Apply stack styles
-        [<Erase>]
-        member this.stack() =
-            this.class' <- "stack"
-            this
-        
-        /// Apply toast styles
-        [<Erase>]
-        member this.toast(?position: Position) =
+            div(class' = CssClass.combine classes)
+    
+    /// Stack component
+    type stack =
+        [<SolidComponent>]
+        static member Invoke() =
+            div(class' = "stack")
+    
+    /// Toast component
+    type toast =
+        [<SolidComponent>]
+        static member Invoke(?position: Position) =
             let classes = [
                 "toast"
                 if position.IsSome then
@@ -88,19 +97,5 @@ module Layout =
                     | TopEnd -> "toast-top toast-end"
                     | BottomStart -> "toast-bottom toast-start"
                     | BottomEnd -> "toast-bottom toast-end"
-                    | _ -> ""
             ]
-            this.class' <- CssClass.combine classes
-            this
-    
-    /// Footer extensions
-    type footer with
-        /// Apply footer styles
-        [<Erase>]
-        member this.footer(?center: bool) =
-            let classes = [
-                "footer"
-                if center = Some true then "footer-center"
-            ]
-            this.class' <- CssClass.combine classes
-            this
+            div(class' = CssClass.combine classes)

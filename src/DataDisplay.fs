@@ -3,141 +3,101 @@ namespace Oxpecker.Solid.DaisyUI
 open Fable.Core
 open Oxpecker.Solid
 
-/// DaisyUI Data Display components
+/// DaisyUI Data Display components  
 module DataDisplay =
     
-    /// Badge extensions
-    type span with
-        /// Apply badge styles
-        [<Erase>]
-        member this.badge(?color: ColorVariant, ?size: Size, ?outline: bool) =
+    /// Badge component
+    type badge =
+        [<SolidComponent>]
+        static member Invoke(?color: ColorVariant, ?size: Size, ?outline: bool) =
             let classes = [
                 "badge"
-                if color.IsSome then
-                    match color.Value with
-                    | Primary -> "badge-primary"
-                    | Secondary -> "badge-secondary"
-                    | Accent -> "badge-accent"
-                    | Neutral -> "badge-neutral"
-                    | Info -> "badge-info"
-                    | Success -> "badge-success"
-                    | Warning -> "badge-warning"
-                    | Error -> "badge-error"
-                    | Ghost -> "badge-ghost"
-                if size.IsSome then
-                    match size.Value with
-                    | ExtraSmall | Small -> "badge-sm"
-                    | Medium -> "badge-md"
-                    | Large | ExtraLarge -> "badge-lg"
                 if outline = Some true then "badge-outline"
+                if color.IsSome then CssClass.ofColorVariant "badge" color.Value
+                if size.IsSome then CssClass.ofSize "badge" size.Value
             ]
-            this.class' <- CssClass.combine classes
-            this
+            span(class' = CssClass.combine classes)
     
-    /// Card and Stats extensions for div
-    type div with
-        /// Apply card styles
-        [<Erase>]
-        member this.card(?compact: bool, ?bordered: bool, ?imageFull: bool) =
+    /// Card component
+    type card =
+        [<SolidComponent>]
+        static member Invoke(?bordered: bool, ?imageFull: bool, ?color: ColorVariant, ?compact: bool, ?side: bool) =
             let classes = [
                 "card"
-                if compact = Some true then "card-compact"
                 if bordered = Some true then "card-bordered"
                 if imageFull = Some true then "image-full"
+                if compact = Some true then "card-compact"
+                if side = Some true then "card-side"
+                if color.IsSome then
+                    match color.Value with
+                    | Primary -> "bg-primary text-primary-content"
+                    | Secondary -> "bg-secondary text-secondary-content"
+                    | Accent -> "bg-accent text-accent-content"
+                    | Neutral -> "bg-neutral text-neutral-content"
+                    | _ -> ""
             ]
-            this.class' <- CssClass.combine classes
-            this
-        
-        /// Apply card body styles
-        [<Erase>]
-        member this.cardBody() =
-            this.class' <- "card-body"
-            this
-        
-        /// Apply card actions styles
-        [<Erase>]
-        member this.cardActions() =
-            this.class' <- "card-actions"
-            this
-        
-        /// Apply avatar styles
-        [<Erase>]
-        member this.avatar(?isOnline: bool, ?placeholder: bool) =
+            div(class' = CssClass.combine classes)
+    
+    /// Card body component
+    [<SolidComponent>]
+    let cardBody() = div(class' = "card-body")
+    
+    /// Card title component
+    [<SolidComponent>]
+    let cardTitle() = h2(class' = "card-title")
+    
+    /// Card actions component
+    [<SolidComponent>]
+    let cardActions() = div(class' = "card-actions")
+    
+    /// Avatar component
+    type avatar =
+        [<SolidComponent>]
+        static member Invoke(?online: bool, ?offline: bool, ?placeholder: bool) =
             let classes = [
                 "avatar"
-                if isOnline = Some true then "online"
-                elif isOnline = Some false then "offline"
+                if online = Some true then "online"
+                if offline = Some true then "offline"
                 if placeholder = Some true then "placeholder"
             ]
-            this.class' <- CssClass.combine classes
-            this
-        
-        /// Apply stat styles
-        [<Erase>]
-        member this.stat() =
-            this.class' <- "stat"
-            this
-        
-        /// Apply stat title styles
-        [<Erase>]
-        member this.statTitle() =
-            this.class' <- "stat-title"
-            this
-        
-        /// Apply stat value styles
-        [<Erase>]
-        member this.statValue() =
-            this.class' <- "stat-value"
-            this
-        
-        /// Apply stat desc styles
-        [<Erase>]
-        member this.statDesc() =
-            this.class' <- "stat-desc"
-            this
-        
-        /// Apply stats container styles
-        [<Erase>]
-        member this.stats(?vertical: bool) =
+            div(class' = CssClass.combine classes)
+    
+    /// Stats container component
+    type stats =
+        [<SolidComponent>]
+        static member Invoke(?vertical: bool, ?horizontal: bool) =
             let classes = [
                 "stats"
                 if vertical = Some true then "stats-vertical"
+                if horizontal = Some true then "stats-horizontal"
             ]
-            this.class' <- CssClass.combine classes
-            this
+            div(class' = CssClass.combine classes)
     
-    /// Card title extension for h2
-    type h2 with
-        /// Apply card title styles
-        [<Erase>]
-        member this.cardTitle() =
-            this.class' <- "card-title"
-            this
+    /// Stat item component
+    [<SolidComponent>]
+    let stat() = div(class' = "stat")
     
-    /// Table extensions
-    type table with
-        /// Apply table styles
-        [<Erase>]
-        member this.table(?zebra: bool, ?pinRows: bool, ?pinCols: bool) =
+    /// Table component - rename to avoid shadowing
+    type daisy_table =
+        [<SolidComponent>]
+        static member Invoke(?zebra: bool, ?pinRows: bool, ?pinCols: bool, ?size: Size) =
             let classes = [
                 "table"
                 if zebra = Some true then "table-zebra"
                 if pinRows = Some true then "table-pin-rows"
                 if pinCols = Some true then "table-pin-cols"
+                if size.IsSome then CssClass.ofSize "table" size.Value
             ]
-            this.class' <- CssClass.combine classes
-            this
+            table(class' = CssClass.combine classes)
     
-    /// Timeline extensions
-    type ul with
-        /// Apply timeline styles
-        [<Erase>]
-        member this.timeline(?vertical: bool, ?compact: bool) =
+    /// Timeline component
+    type timeline =
+        [<SolidComponent>]
+        static member Invoke(?vertical: bool, ?horizontal: bool, ?compact: bool) =
             let classes = [
                 "timeline"
                 if vertical = Some true then "timeline-vertical"
+                if horizontal = Some true then "timeline-horizontal"
                 if compact = Some true then "timeline-compact"
             ]
-            this.class' <- CssClass.combine classes
-            this
-
+            ul(class' = CssClass.combine classes)

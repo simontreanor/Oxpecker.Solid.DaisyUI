@@ -1,104 +1,93 @@
 namespace Oxpecker.Solid.DaisyUI
 
-open Oxpecker.Solid
+/// Color variants for DaisyUI components
+type ColorVariant =
+    | Primary
+    | Secondary
+    | Accent
+    | Neutral
+    | Info
+    | Success
+    | Warning
+    | Error
+    | Ghost
 
-/// Common types and utilities for DaisyUI components
-[<AutoOpen>]
-module Common =
+/// Size variants for components
+type Size =
+    | ExtraSmall
+    | Small
+    | Medium
+    | Large
+    | ExtraLarge
+
+/// Button style variants
+type ButtonStyle =
+    | Outline
+    | Ghost
+    | Link
+
+/// Position variants
+type Position =
+    | Top
+    | Bottom
+    | Left
+    | Right
+    | TopStart
+    | TopEnd
+    | BottomStart
+    | BottomEnd
+
+/// Modal position
+type ModalPosition =
+    | ModalTop
+    | ModalMiddle
+    | ModalBottom
+
+/// Helper module for CSS class manipulation
+module CssClass =
+    /// Combine multiple CSS classes into a single string
+    let combine (classes: string list) =
+        classes
+        |> List.filter (fun s -> not (System.String.IsNullOrWhiteSpace s))
+        |> String.concat " "
     
-    /// DaisyUI color variants
-    type ColorVariant =
-        | Primary
-        | Secondary
-        | Accent
-        | Neutral
-        | Info
-        | Success
-        | Warning
-        | Error
-        | Ghost
-        
-    /// DaisyUI size variants
-    type Size =
-        | ExtraSmall
-        | Small
-        | Medium
-        | Large
-        | ExtraLarge
-        
-    /// DaisyUI button styles
-    type ButtonStyle =
-        | Outline
-        | Link
-        | Glass
-        
-    /// DaisyUI positions
-    type Position =
-        | Top
-        | Bottom
-        | Left
-        | Right
-        | TopStart
-        | TopEnd
-        | BottomStart
-        | BottomEnd
-        | LeftStart
-        | LeftEnd
-        | RightStart
-        | RightEnd
-        
-    /// DaisyUI responsive positions
-    type ResponsivePosition =
-        | Start
-        | Center
-        | End
-        
-    /// Helper functions for converting types to CSS classes
-    module CssClass =
-        
-        let ofColorVariant = function
-            | Primary -> "btn-primary"
-            | Secondary -> "btn-secondary"
-            | Accent -> "btn-accent"
-            | Neutral -> "btn-neutral"
-            | Info -> "btn-info"
-            | Success -> "btn-success"
-            | Warning -> "btn-warning"
-            | Error -> "btn-error"
-            | Ghost -> "btn-ghost"
-            
-        let ofSize = function
-            | ExtraSmall -> "btn-xs"
-            | Small -> "btn-sm"
-            | Medium -> ""
-            | Large -> "btn-lg"
-            | ExtraLarge -> "btn-xl"
-            
-        let ofButtonStyle = function
-            | Outline -> "btn-outline"
-            | Link -> "btn-link"
-            | Glass -> "glass"
-            
-        let ofPosition = function
-            | Top -> "dropdown-top"
-            | Bottom -> "dropdown-bottom"
-            | Left -> "dropdown-left"
-            | Right -> "dropdown-right"
-            | TopStart -> "dropdown-top dropdown-start"
-            | TopEnd -> "dropdown-top dropdown-end"
-            | BottomStart -> "dropdown-bottom dropdown-start"
-            | BottomEnd -> "dropdown-bottom dropdown-end"
-            | LeftStart -> "dropdown-left dropdown-start"
-            | LeftEnd -> "dropdown-left dropdown-end"
-            | RightStart -> "dropdown-right dropdown-start"
-            | RightEnd -> "dropdown-right dropdown-end"
-            
-        let ofResponsivePosition = function
-            | Start -> "start"
-            | Center -> "center"
-            | End -> "end"
-            
-        let combine (classes: string list) =
-            classes 
-            |> List.filter (fun s -> not (System.String.IsNullOrWhiteSpace(s)))
-            |> String.concat " "
+    /// Convert ColorVariant to CSS class with prefix
+    let ofColorVariant (prefix: string) (variant: ColorVariant) =
+        match variant with
+        | Primary -> $"{prefix}-primary"
+        | Secondary -> $"{prefix}-secondary"
+        | Accent -> $"{prefix}-accent"
+        | Neutral -> $"{prefix}-neutral"
+        | Info -> $"{prefix}-info"
+        | Success -> $"{prefix}-success"
+        | Warning -> $"{prefix}-warning"
+        | Error -> $"{prefix}-error"
+        | ColorVariant.Ghost -> $"{prefix}-ghost"
+    
+    /// Convert Size to CSS class with prefix
+    let ofSize (prefix: string) (size: Size) =
+        match size with
+        | ExtraSmall -> $"{prefix}-xs"
+        | Small -> $"{prefix}-sm"
+        | Medium -> $"{prefix}-md"
+        | Large -> $"{prefix}-lg"
+        | ExtraLarge -> $"{prefix}-xl"
+    
+    /// Convert ButtonStyle to CSS class
+    let ofButtonStyle (style: ButtonStyle) =
+        match style with
+        | Outline -> "btn-outline"
+        | ButtonStyle.Ghost -> "btn-ghost"
+        | Link -> "btn-link"
+    
+    /// Convert Position to CSS class with prefix
+    let ofPosition (prefix: string) (position: Position) =
+        match position with
+        | Top -> $"{prefix}-top"
+        | Bottom -> $"{prefix}-bottom"
+        | Left -> $"{prefix}-left"
+        | Right -> $"{prefix}-right"
+        | TopStart -> $"{prefix}-top {prefix}-start"
+        | TopEnd -> $"{prefix}-top {prefix}-end"
+        | BottomStart -> $"{prefix}-bottom {prefix}-start"
+        | BottomEnd -> $"{prefix}-bottom {prefix}-end"
