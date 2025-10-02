@@ -197,3 +197,22 @@ module DataInput =
         static member Invoke(?class': string) =
             let classes = ["fieldset-legend"; if class'.IsSome then class'.Value]
             legend(class' = CssClass.combine classes)
+    
+    /// Validator component - Applies validation styling to form elements
+    type Validator =
+        [<SolidComponent>]
+        static member Invoke(?class': string) =
+            let classes = ["validator"; if class'.IsSome then class'.Value]
+            div(class' = CssClass.combine classes)
+    
+    /// ValidatorHint part - Hint text that appears when validation fails
+    type ValidatorHint =
+        [<SolidComponent>]
+        static member Invoke(?class': string, ?hidden: bool) =
+            let classes = 
+                [
+                    "validator-hint"
+                    if hidden = Some true then "hidden"
+                    if class'.IsSome then class'.Value
+                ]
+            span(class' = CssClass.combine classes)

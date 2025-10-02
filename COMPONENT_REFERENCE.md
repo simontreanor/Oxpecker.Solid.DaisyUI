@@ -25,6 +25,10 @@ All DaisyUI components use **PascalCase** naming to:
 - **Stat** - `Stat() { stat content }`
 - **Table** - `Table(zebra = true) { table content }`
 - **Timeline** - `Timeline(orientation = Vertical) { events }`
+- **List** - `List() { list items }`
+- **ListRow** - `ListRow() { row content }`
+- **Status** - `Status() { status icon }`
+- **HoverGallery** - `HoverGallery() { images }`
 
 ### Data Input
 - **Checkbox** - `Checkbox(color = Primary)`
@@ -36,6 +40,8 @@ All DaisyUI components use **PascalCase** naming to:
 - **Toggle** - `Toggle(color = Primary)`
 - **FileInput** - `FileInput(bordered = true)`
 - **Rating** - `Rating(size = Large) { stars }`
+- **Validator** - `Validator() { form element }`
+- **ValidatorHint** - `ValidatorHint(hidden = true) { "Error message" }`
 
 ### Layout
 - **Artboard** - `Artboard(phone = true) { content }`
@@ -51,6 +57,8 @@ All DaisyUI components use **PascalCase** naming to:
 ### Navigation
 - **Breadcrumbs** - `Breadcrumbs() { breadcrumb items }`
 - **BottomNav** - `BottomNav(size = Large) { nav items }`
+- **Dock** - `Dock(size = Medium) { dock items }`
+- **DockLabel** - `DockLabel(active = true) { "Home" }`
 - **Link** - `Link(hover = true) { "Link text" }`
 - **Menu** - `Menu(orientation = Horizontal) { menu items }`
 - **Navbar** - `Navbar() { nav content }`

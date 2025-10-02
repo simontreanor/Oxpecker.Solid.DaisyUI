@@ -300,9 +300,23 @@ module DataDisplay =
             let classes = ["list"; if class'.IsSome then class'.Value]
             ul(class' = CssClass.combine classes)
     
+    /// ListRow part - List item row
+    type ListRow =
+        [<SolidComponent>]
+        static member Invoke(?class': string) =
+            let classes = ["list-row"; if class'.IsSome then class'.Value]
+            li(class' = CssClass.combine classes)
+    
     /// Status component - Small icon showing current status
     type Status =
         [<SolidComponent>]
         static member Invoke(?class': string) =
             let classes = ["status"; if class'.IsSome then class'.Value]
+            div(class' = CssClass.combine classes)
+    
+    /// HoverGallery component - Image gallery that reveals images on horizontal hover
+    type HoverGallery =
+        [<SolidComponent>]
+        static member Invoke(?class': string) =
+            let classes = ["hover-gallery"; if class'.IsSome then class'.Value]
             div(class' = CssClass.combine classes)

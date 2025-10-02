@@ -137,3 +137,33 @@ module Navigation =
     /// Pagination component - Note: Uses Join component for grouping buttons
     /// This is just a type alias for better semantics
     type Pagination = Join
+    
+    /// Dock component - Bottom navigation that sticks to bottom of screen
+    type Dock =
+        [<SolidComponent>]
+        static member Invoke(?class': string, ?size: Size) =
+            let classes = 
+                [
+                    "dock"
+                    match size with
+                    | Some ExtraSmall -> "dock-xs"
+                    | Some Small -> "dock-sm"
+                    | Some Medium -> "dock-md"
+                    | Some Large -> "dock-lg"
+                    | Some ExtraLarge -> "dock-xl"
+                    | None -> ""
+                    if class'.IsSome then class'.Value
+                ]
+            nav(class' = CssClass.combine classes)
+    
+    /// DockLabel part - Text label for Dock items
+    type DockLabel =
+        [<SolidComponent>]
+        static member Invoke(?class': string, ?active: bool) =
+            let classes = 
+                [
+                    "dock-label"
+                    if active = Some true then "dock-label-active"
+                    if class'.IsSome then class'.Value
+                ]
+            span(class' = CssClass.combine classes)
