@@ -9,23 +9,28 @@ module Navigation =
     /// Breadcrumbs component - Breadcrumb navigation
     type Breadcrumbs =
         [<SolidComponent>]
-        static member Invoke() =
-            div(class' = "breadcrumbs")
+        static member Invoke(?class': string) =
+            let classes = [
+                "breadcrumbs"
+                if class'.IsSome then class'.Value
+            ]
+            div(class' = CssClass.combine classes)
     
     /// Bottom navigation component
     type BottomNav =
         [<SolidComponent>]
-        static member Invoke(?size: Size) =
+        static member Invoke(?class': string, ?size: Size) =
             let classes = [
                 "btm-nav"
                 if size.IsSome then CssClass.ofSize "btm-nav" size.Value
+                if class'.IsSome then class'.Value
             ]
             div(class' = CssClass.combine classes)
     
     /// Link component (no conflict with PascalCase)
     type Link =
         [<SolidComponent>]
-        static member Invoke(?color: ColorVariant, ?hover: bool) =
+        static member Invoke(?class': string, ?color: ColorVariant, ?hover: bool) =
             let classes = [
                 "link"
                 if hover = Some true then "link-hover"
@@ -40,42 +45,49 @@ module Navigation =
                     | Warning -> "link-warning"
                     | Error -> "link-error"
                     | _ -> ""
+                if class'.IsSome then class'.Value
             ]
             a(class' = CssClass.combine classes)
     
     /// Menu component - Menu list
     type Menu =
         [<SolidComponent>]
-        static member Invoke(?vertical: bool, ?horizontal: bool, ?size: Size) =
+        static member Invoke(?class': string, ?vertical: bool, ?horizontal: bool, ?size: Size) =
             let classes = [
                 "menu"
                 if vertical = Some true then "menu-vertical"
                 if horizontal = Some true then "menu-horizontal"
                 if size.IsSome then CssClass.ofSize "menu" size.Value
+                if class'.IsSome then class'.Value
             ]
             ul(class' = CssClass.combine classes)
     
     /// Navbar component - Navigation bar
     type Navbar =
         [<SolidComponent>]
-        static member Invoke() =
-            div(class' = "navbar bg-base-100")
+        static member Invoke(?class': string) =
+            let classes = [
+                "navbar bg-base-100"
+                if class'.IsSome then class'.Value
+            ]
+            div(class' = CssClass.combine classes)
     
     /// Steps component - Step indicator
     type Steps =
         [<SolidComponent>]
-        static member Invoke(?vertical: bool, ?horizontal: bool) =
+        static member Invoke(?class': string, ?vertical: bool, ?horizontal: bool) =
             let classes = [
                 "steps"
                 if vertical = Some true then "steps-vertical"
                 if horizontal = Some true then "steps-horizontal"
+                if class'.IsSome then class'.Value
             ]
             ul(class' = CssClass.combine classes)
     
     /// Step item component
     type Step =
         [<SolidComponent>]
-        static member Invoke(?color: ColorVariant) =
+        static member Invoke(?class': string, ?color: ColorVariant) =
             let classes = [
                 "step"
                 if color.IsSome then
@@ -88,29 +100,32 @@ module Navigation =
                     | Warning -> "step-warning"
                     | Error -> "step-error"
                     | _ -> ""
+                if class'.IsSome then class'.Value
             ]
             li(class' = CssClass.combine classes)
     
     /// Tabs component - Tab navigation
     type Tabs =
         [<SolidComponent>]
-        static member Invoke(?boxed: bool, ?lifted: bool, ?bordered: bool, ?size: Size) =
+        static member Invoke(?class': string, ?boxed: bool, ?lifted: bool, ?bordered: bool, ?size: Size) =
             let classes = [
                 "tabs"
                 if boxed = Some true then "tabs-boxed"
                 if lifted = Some true then "tabs-lifted"
                 if bordered = Some true then "tabs-bordered"
                 if size.IsSome then CssClass.ofSize "tabs" size.Value
+                if class'.IsSome then class'.Value
             ]
             div(class' = CssClass.combine classes)
     
     /// Tab item component
     type Tab =
         [<SolidComponent>]
-        static member Invoke(?active: bool, ?disabled: bool) =
+        static member Invoke(?class': string, ?active: bool, ?disabled: bool) =
             let classes = [
                 "tab"
                 if active = Some true then "tab-active"
                 if disabled = Some true then "tab-disabled"
+                if class'.IsSome then class'.Value
             ]
             a(class' = CssClass.combine classes)

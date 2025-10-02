@@ -9,82 +9,96 @@ module Layout =
     /// Artboard component - Mobile device mockup
     type Artboard =
         [<SolidComponent>]
-        static member Invoke(?phone: bool, ?horizontal: bool) =
+        static member Invoke(?class': string, ?phone: bool, ?horizontal: bool) =
             let classes = [
                 "artboard"
                 if phone = Some true then "artboard-demo phone-1"
                 if horizontal = Some true then "artboard-horizontal"
+                if class'.IsSome then class'.Value
             ]
             div(class' = CssClass.combine classes)
     
     /// Divider component - Visual separator
     type Divider =
         [<SolidComponent>]
-        static member Invoke(?vertical: bool, ?horizontal: bool) =
+        static member Invoke(?class': string, ?vertical: bool, ?horizontal: bool) =
             let classes = [
                 "divider"
                 if vertical = Some true then "divider-vertical"
                 if horizontal = Some true then "divider-horizontal"
+                if class'.IsSome then class'.Value
             ]
             div(class' = CssClass.combine classes)
     
     /// Drawer component - Sidebar drawer
     type Drawer =
         [<SolidComponent>]
-        static member Invoke(?isEnd: bool) =
+        static member Invoke(?class': string, ?isEnd: bool) =
             let classes = [
                 "drawer"
                 if isEnd = Some true then "drawer-end"
+                if class'.IsSome then class'.Value
             ]
             div(class' = CssClass.combine classes)
     
     /// Footer component (no conflict with PascalCase)
     type Footer =
         [<SolidComponent>]
-        static member Invoke(?center: bool) =
+        static member Invoke(?class': string, ?center: bool) =
             let classes = [
                 "footer"
                 if center = Some true then "footer-center"
+                if class'.IsSome then class'.Value
             ]
             footer(class' = CssClass.combine classes)
     
     /// Hero component - Hero section
     type Hero =
         [<SolidComponent>]
-        static member Invoke(?overlay: bool) =
+        static member Invoke(?class': string, ?overlay: bool) =
             let classes = [
                 "hero"
                 if overlay = Some true then "hero-overlay"
+                if class'.IsSome then class'.Value
             ]
             div(class' = CssClass.combine classes)
     
     /// Indicator component - Badge indicator
     type Indicator =
         [<SolidComponent>]
-        static member Invoke() =
-            div(class' = "indicator")
+        static member Invoke(?class': string) =
+            let classes = [
+                "indicator"
+                if class'.IsSome then class'.Value
+            ]
+            div(class' = CssClass.combine classes)
     
     /// Join component - Grouped elements
     type Join =
         [<SolidComponent>]
-        static member Invoke(?vertical: bool, ?horizontal: bool) =
+        static member Invoke(?class': string, ?vertical: bool, ?horizontal: bool) =
             let classes = [
                 "join"
                 if vertical = Some true then "join-vertical"
                 if horizontal = Some true then "join-horizontal"
+                if class'.IsSome then class'.Value
             ]
             div(class' = CssClass.combine classes)
     
     /// Stack component - Stacked elements
     type Stack =
         [<SolidComponent>]
-        static member Invoke() =
-            div(class' = "stack")
+        static member Invoke(?class': string) =
+            let classes = [
+                "stack"
+                if class'.IsSome then class'.Value
+            ]
+            div(class' = CssClass.combine classes)
     
     /// Toast component - Toast notification
     type Toast =
         [<SolidComponent>]
-        static member Invoke(?position: Position) =
+        static member Invoke(?class': string, ?position: Position) =
             let classes = [
                 "toast"
                 if position.IsSome then
@@ -97,5 +111,6 @@ module Layout =
                     | TopEnd -> "toast-top toast-end"
                     | BottomStart -> "toast-bottom toast-start"
                     | BottomEnd -> "toast-bottom toast-end"
+                if class'.IsSome then class'.Value
             ]
             div(class' = CssClass.combine classes)

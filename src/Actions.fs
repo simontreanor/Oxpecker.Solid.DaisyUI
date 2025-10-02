@@ -10,7 +10,7 @@ module Actions =
     type Button =
         /// Invoke to create a DaisyUI button
         [<SolidComponent>]
-        static member Invoke(?color: ColorVariant, ?size: Size, ?outline: bool, ?wide: bool,
+        static member Invoke(?class': string, ?color: ColorVariant, ?size: Size, ?outline: bool, ?wide: bool,
                              ?block: bool, ?circle: bool, ?square: bool, ?glass: bool,
                              ?disabled: bool, ?loading: bool, ?active: bool) =
             let classes = [
@@ -25,6 +25,7 @@ module Actions =
                 if active = Some true then "btn-active"
                 if color.IsSome then CssClass.ofColorVariant "btn" color.Value
                 if size.IsSome then CssClass.ofSize "btn" size.Value
+                if class'.IsSome then class'.Value
             ]
             let htmlBtn : button = button(class' = CssClass.combine classes)
             if disabled = Some true then htmlBtn.disabled <- true

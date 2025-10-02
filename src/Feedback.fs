@@ -9,7 +9,7 @@ module Feedback =
     /// Alert component - Alert message
     type Alert =
         [<SolidComponent>]
-        static member Invoke(?color: ColorVariant) =
+        static member Invoke(?class': string, ?color: ColorVariant) =
             let classes = [
                 "alert"
                 if color.IsSome then
@@ -19,13 +19,14 @@ module Feedback =
                     | Warning -> "alert-warning"
                     | Error -> "alert-error"
                     | _ -> ""
+                if class'.IsSome then class'.Value
             ]
             div(class' = CssClass.combine classes)
     
     /// Loading spinner component
     type Loading =
         [<SolidComponent>]
-        static member Invoke(?variant: string, ?size: Size, ?color: ColorVariant) =
+        static member Invoke(?class': string, ?variant: string, ?size: Size, ?color: ColorVariant) =
             let classes = [
                 "loading"
                 match variant with
@@ -47,23 +48,25 @@ module Feedback =
                     | Warning -> "text-warning"
                     | Error -> "text-error"
                     | _ -> ""
+                if class'.IsSome then class'.Value
             ]
             span(class' = CssClass.combine classes)
     
     /// Progress bar component
     type Progress =
         [<SolidComponent>]
-        static member Invoke(?color: ColorVariant) =
+        static member Invoke(?class': string, ?color: ColorVariant) =
             let classes = [
                 "progress"
                 if color.IsSome then CssClass.ofColorVariant "progress" color.Value
+                if class'.IsSome then class'.Value
             ]
             progress(class' = CssClass.combine classes)
     
     /// Radial progress component
     type RadialProgress =
         [<SolidComponent>]
-        static member Invoke(value: int, ?color: ColorVariant, ?size: string) =
+        static member Invoke(value: int, ?class': string, ?color: ColorVariant, ?size: string) =
             let sizeValue = defaultArg size "12rem"
             let classes = [
                 "radial-progress"
@@ -77,6 +80,7 @@ module Feedback =
                     | Warning -> "text-warning"
                     | Error -> "text-error"
                     | _ -> ""
+                if class'.IsSome then class'.Value
             ]
             div(class' = CssClass.combine classes)
                 .attr("role", "progressbar")
@@ -85,13 +89,17 @@ module Feedback =
     /// Skeleton component - Loading placeholder
     type Skeleton =
         [<SolidComponent>]
-        static member Invoke() =
-            div(class' = "skeleton")
+        static member Invoke(?class': string) =
+            let classes = [
+                "skeleton"
+                if class'.IsSome then class'.Value
+            ]
+            div(class' = CssClass.combine classes)
     
     /// Tooltip component
     type Tooltip =
         [<SolidComponent>]
-        static member Invoke(?position: Position, ?color: ColorVariant, ?isOpen: bool) =
+        static member Invoke(?class': string, ?position: Position, ?color: ColorVariant, ?isOpen: bool) =
             let classes = [
                 "tooltip"
                 if position.IsSome then
@@ -103,5 +111,6 @@ module Feedback =
                     | _ -> ""
                 if color.IsSome then CssClass.ofColorVariant "tooltip" color.Value
                 if isOpen = Some true then "tooltip-open"
+                if class'.IsSome then class'.Value
             ]
             div(class' = CssClass.combine classes)

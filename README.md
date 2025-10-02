@@ -63,7 +63,7 @@ open Oxpecker.Solid.DaisyUI
 
 [<SolidComponent>]
 let App() =
-    div().class'("container mx-auto p-4") {
+    div(class' = "container mx-auto p-4") {
         // DaisyUI Card with Button - Clean syntax!
         Card(bordered = true) {
             CardBody() {
@@ -204,10 +204,10 @@ let MyModal() =
         // Modal
         Show(``when`` = isOpen) <| Fragment() {
             modal(isOpen = isOpen()).attr("open", "true") {
-                div().class'("modal-box") {
-                    h3().class'("font-bold text-lg") { "Hello!" }
-                    p().class'("py-4") { "This is a modal dialog" }
-                    div().class'("modal-action") {
+                div(class' = "modal-box") {
+                    h3(class' = "font-bold text-lg") { "Hello!" }
+                    p(class' = "py-4") { "This is a modal dialog" }
+                    div(class' = "modal-action") {
                         Button().onClick(fun _ -> setIsOpen(false)) {
                             "Close"
                         }
@@ -231,14 +231,14 @@ let StatsCard() =
             
             Stats() {
                 Stat() {
-                    div().class'("stat-title") { "Total Users" }
-                    div().class'("stat-value") { "25.6K" }
-                    div().class'("stat-desc") { "↗︎ 400 (22%)" }
+                    div(class' = "stat-title") { "Total Users" }
+                    div(class' = "stat-value") { "25.6K" }
+                    div(class' = "stat-desc") { "↗︎ 400 (22%)" }
                 }
                 Stat() {
-                    div().class'("stat-title") { "Page Views" }
-                    div().class'("stat-value") { "2.6M" }
-                    div().class'("stat-desc") { "↗︎ 90 (14%)" }
+                    div(class' = "stat-title") { "Page Views" }
+                    div(class' = "stat-value") { "2.6M" }
+                    div(class' = "stat-desc") { "↗︎ 90 (14%)" }
                 }
             }
         }
@@ -255,24 +255,24 @@ let MyForm() =
     let name, setName = createSignal ""
     let agreed, setAgreed = createSignal false
     
-    form().class'("space-y-4") {
-        div().class'("form-control") {
-            label().class'("label") {
-                span().class'("label-text") { "Your Name" }
+    form(class' = "space-y-4") {
+        div(class' = "form-control") {
+            label(class' = "label") {
+                span(class' = "label-text") { "Your Name" }
             }
             textInput(placeholder = "Enter your name", bordered = true)
         }
         
-        div().class'("form-control") {
-            label().class'("label cursor-pointer") {
-                span().class'("label-text") { "I agree to terms" }
+        div(class' = "form-control") {
+            label(class' = "label cursor-pointer") {
+                span(class' = "label-text") { "I agree to terms" }
                 checkbox(color = Primary)
             }
         }
         
-        div().class'("form-control") {
-            label().class'("label") {
-                span().class'("label-text") { "Select option" }
+        div(class' = "form-control") {
+            label(class' = "label") {
+                span(class' = "label-text") { "Select option" }
             }
             select(bordered = true) {
                 option() { "Option 1" }

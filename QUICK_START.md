@@ -126,29 +126,29 @@ Badge(color = Success, size = Small) { "Success" }
 ```fsharp
 [<SolidComponent>]
 let MyApp() =
-    div().class'("min-h-screen bg-base-200") {
+    div(class' = "min-h-screen bg-base-200") {
         Navbar() {
-            div().class'("flex-1") {
-                a().class'("btn btn-ghost text-xl") { "My App" }
+            div(class' = "flex-1") {
+                a(class' = "btn btn-ghost text-xl") { "My App" }
             }
         }
         
         Hero() {
-            div().class'("hero-content text-center") {
-                div().class'("max-w-md") {
-                    h1().class'("text-5xl font-bold") { "Welcome!" }
-                    p().class'("py-6") { "Get started with DaisyUI" }
+            div(class' = "hero-content text-center") {
+                div(class' = "max-w-md") {
+                    h1(class' = "text-5xl font-bold") { "Welcome!" }
+                    p(class' = "py-6") { "Get started with DaisyUI" }
                     Button(color = Primary, size = Large) { "Get Started" }
                 }
             }
         }
         
-        div().class'("container mx-auto p-4") {
+        div(class' = "container mx-auto p-4") {
             Card(bordered = true) {
                 CardBody() {
                     CardTitle() { "Example Card" }
                     p() { "This demonstrates the clean API syntax" }
-                    div().class'("card-actions justify-end") {
+                    div(class' = "card-actions justify-end") {
                         Button(color = Primary) { "Action" }
                     }
                 }
