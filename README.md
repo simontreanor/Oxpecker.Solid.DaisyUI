@@ -37,19 +37,37 @@ npm install -D tailwindcss@latest
 
 ### Tailwind Configuration
 
-Update your `tailwind.config.js`:
+For DaisyUI v4+, configure it directly in your CSS file (e.g., `src/index.css`):
 
-```javascript
-module.exports = {
-  content: [
-    "./src/**/*.{fs,jsx,tsx}",
-  ],
-  plugins: [require("daisyui")],
-  daisyui: {
-    themes: ["light", "dark", "cupcake"],
-  },
+```css
+@import "tailwindcss";
+
+@plugin "daisyui" {
+  themes: winter --default, sunset --prefersdark;
+  root: ":root";
 }
 ```
+
+You can customize the themes:
+
+```css
+@import "tailwindcss";
+
+@plugin "daisyui" {
+  themes: light --default, dark --prefersdark, cupcake, synthwave;
+  root: ":root";
+}
+```
+
+Or use all available themes:
+
+```css
+@import "tailwindcss";
+
+@plugin "daisyui";
+```
+
+The theme will automatically switch based on user's system preference, or you can use the `ThemeController` component for manual theme switching.
 
 ## Quick Start
 
@@ -78,7 +96,7 @@ let App() =
         }
         
         // Alert component
-        alert(color = Success) {
+        Alert(color = Success) {
             span() { "✓ Your application is ready!" }
         }
     }
@@ -110,66 +128,66 @@ This is achieved using F# types with static `Invoke` members, giving you:
 ### Actions
 Interactive components with clean syntax:
 - **Button** - Buttons with various styles and colors
-- **dropdown** - Dropdown menus
-- **modal** - Modal dialogs
-- **swap** - Swap/toggle animations
-- **themeController** - Theme switching control
+- **Dropdown** - Dropdown menus
+- **Modal** - Modal dialogs
+- **Swap** - Swap/toggle animations
+- **ThemeController** - Theme switching control
 
 ### Data Display
 Components for showing data:
 - **Badge** - Small status indicators
 - **Card** - Content containers
-- **cardTitle** - Card titles
-- **cardBody** - Card body sections
-- **avatar** - User profile images
-- **stat / stats** - Statistics display
-- **daisy_table** - Data tables
-- **timeline** - Event timelines
+- **CardTitle** - Card titles
+- **CardBody** - Card body sections
+- **Avatar** - User profile images
+- **Stat / Stats** - Statistics display
+- **Table** - Data tables
+- **Timeline** - Event timelines
 
 ### Data Input
 Form input components:
-- **checkbox** - Checkbox inputs
-- **radio** - Radio button inputs
-- **textInput** - Text input fields
-- **textarea_input** - Multi-line text areas
-- **select** - Dropdown selects
-- **range** - Range sliders
-- **toggle** - Toggle switches
-- **fileInput** - File upload inputs
-- **rating** - Star ratings
+- **Checkbox** - Checkbox inputs
+- **Radio** - Radio button inputs
+- **TextInput** - Text input fields
+- **Textarea** - Multi-line text areas
+- **Select** - Dropdown selects
+- **Range** - Range sliders
+- **Toggle** - Toggle switches
+- **FileInput** - File upload inputs
+- **Rating** - Star ratings
 
 ### Layout
 Page layout components:
-- **artboard** - Mobile mockup frames
-- **divider** - Content dividers
-- **drawer** - Side drawers
-- **footer_layout** - Page footers
-- **hero** - Hero sections
-- **indicator** - Badge indicators
-- **join** - Grouped items
-- **stack** - Stacked items
-- **toast** - Toast notifications
+- **Artboard** - Mobile mockup frames
+- **Divider** - Content dividers
+- **Drawer** - Side drawers
+- **Footer** - Page footers
+- **Hero** - Hero sections
+- **Indicator** - Badge indicators
+- **Join** - Grouped items
+- **Stack** - Stacked items
+- **Toast** - Toast notifications
 
 ### Navigation
 Navigation components:
-- **breadcrumbs** - Breadcrumb navigation
-- **btmNav** - Bottom navigation bars
-- **link** - Styled links
-- **menu** - Menu lists
-- **navbar** - Navigation bars
-- **steps** - Step indicators
-- **step** - Individual step items
-- **tabs** - Tab navigation
-- **tab** - Individual tab items
+- **Breadcrumbs** - Breadcrumb navigation
+- **BottomNav** - Bottom navigation bars
+- **Link** - Styled links
+- **Menu** - Menu lists
+- **Navbar** - Navigation bars
+- **Steps** - Step indicators
+- **Step** - Individual step items
+- **Tabs** - Tab navigation
+- **Tab** - Individual tab items
 
 ### Feedback
 User feedback components:
-- **alert** - Alert messages
-- **loading** - Loading spinners
-- **progress_bar** - Progress bars
-- **radialProgress** - Circular progress
-- **skeleton** - Loading placeholders
-- **tooltip** - Hover tooltips
+- **Alert** - Alert messages
+- **Loading** - Loading spinners
+- **Progress** - Progress bars
+- **RadialProgress** - Circular progress
+- **Skeleton** - Loading placeholders
+- **Tooltip** - Hover tooltips
 
 ## Component Usage Examples
 
@@ -203,11 +221,11 @@ let MyModal() =
         
         // Modal
         Show(``when`` = isOpen) <| Fragment() {
-            modal(isOpen = isOpen()).attr("open", "true") {
-                div(class' = "modal-box") {
+            Modal(``open`` = isOpen()).attr("open", "true") {
+                ModalBox() {
                     h3(class' = "font-bold text-lg") { "Hello!" }
                     p(class' = "py-4") { "This is a modal dialog" }
-                    div(class' = "modal-action") {
+                    ModalAction() {
                         Button().onClick(fun _ -> setIsOpen(false)) {
                             "Close"
                         }
@@ -256,25 +274,25 @@ let MyForm() =
     let agreed, setAgreed = createSignal false
     
     form(class' = "space-y-4") {
-        div(class' = "form-control") {
-            label(class' = "label") {
-                span(class' = "label-text") { "Your Name" }
+        FormControl() {
+            Label() {
+                LabelText() { "Your Name" }
             }
-            textInput(placeholder = "Enter your name", bordered = true)
+            TextInput(placeholder = "Enter your name", bordered = true)
         }
         
-        div(class' = "form-control") {
-            label(class' = "label cursor-pointer") {
-                span(class' = "label-text") { "I agree to terms" }
-                checkbox(color = Primary)
+        FormControl() {
+            Label(class' = "cursor-pointer") {
+                LabelText() { "I agree to terms" }
+                Checkbox(color = Primary)
             }
         }
         
-        div(class' = "form-control") {
-            label(class' = "label") {
-                span(class' = "label-text") { "Select option" }
+        FormControl() {
+            Label() {
+                LabelText() { "Select option" }
             }
-            select(bordered = true) {
+            Select(bordered = true) {
                 option() { "Option 1" }
                 option() { "Option 2" }
                 option() { "Option 3" }
@@ -351,7 +369,7 @@ let LoadingExample() =
             Loading()
         }
         
-        Progress (Progress()) 100
+        Progress(value = Progress(), max = 100)
         
         let btn = DaisyButton()
         btn.render <| button(onClick = fun _ ->
