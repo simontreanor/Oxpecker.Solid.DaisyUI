@@ -64,11 +64,13 @@ module DataDisplay =
     /// Avatar component - Profile image container
     type Avatar =
         [<SolidComponent>]
-        static member Invoke(?class': string, ?online: bool, ?offline: bool, ?placeholder: bool) =
+        static member Invoke(?class': string, ?status: AvatarStatus, ?placeholder: bool) =
             let classes = [
                 "avatar"
-                if online = Some true then "online"
-                if offline = Some true then "offline"
+                if status.IsSome then
+                    match status.Value with
+                    | Online -> "online"
+                    | Offline -> "offline"
                 if placeholder = Some true then "placeholder"
                 if class'.IsSome then class'.Value
             ]
@@ -77,11 +79,13 @@ module DataDisplay =
     /// Stats container component
     type Stats =
         [<SolidComponent>]
-        static member Invoke(?class': string, ?vertical: bool, ?horizontal: bool) =
+        static member Invoke(?class': string, ?orientation: Orientation) =
             let classes = [
                 "stats"
-                if vertical = Some true then "stats-vertical"
-                if horizontal = Some true then "stats-horizontal"
+                if orientation.IsSome then
+                    match orientation.Value with
+                    | Vertical -> "stats-vertical"
+                    | Horizontal -> "stats-horizontal"
                 if class'.IsSome then class'.Value
             ]
             div(class' = CssClass.combine classes)
@@ -145,11 +149,13 @@ module DataDisplay =
     /// Timeline component - Event timeline
     type Timeline =
         [<SolidComponent>]
-        static member Invoke(?class': string, ?vertical: bool, ?horizontal: bool, ?compact: bool) =
+        static member Invoke(?class': string, ?orientation: Orientation, ?compact: bool) =
             let classes = [
                 "timeline"
-                if vertical = Some true then "timeline-vertical"
-                if horizontal = Some true then "timeline-horizontal"
+                if orientation.IsSome then
+                    match orientation.Value with
+                    | Vertical -> "timeline-vertical"
+                    | Horizontal -> "timeline-horizontal"
                 if compact = Some true then "timeline-compact"
                 if class'.IsSome then class'.Value
             ]
@@ -158,11 +164,13 @@ module DataDisplay =
     /// Chat component - Container for one line of conversation
     type Chat =
         [<SolidComponent>]
-        static member Invoke(?class': string, ?start: bool, ?``end``: bool) =
+        static member Invoke(?class': string, ?alignment: Alignment) =
             let classes = [
                 "chat"
-                if start = Some true then "chat-start"
-                if ``end`` = Some true then "chat-end"
+                if alignment.IsSome then
+                    match alignment.Value with
+                    | AlignStart -> "chat-start"
+                    | AlignEnd -> "chat-end"
                 if class'.IsSome then class'.Value
             ]
             div(class' = CssClass.combine classes)
@@ -202,11 +210,13 @@ module DataDisplay =
     /// Carousel component - Shows images or content in a scrollable area
     type Carousel =
         [<SolidComponent>]
-        static member Invoke(?class': string, ?center: bool, ?``end``: bool, ?vertical: bool) =
+        static member Invoke(?class': string, ?snap: CarouselSnap, ?vertical: bool) =
             let classes = [
                 "carousel"
-                if center = Some true then "carousel-center"
-                if ``end`` = Some true then "carousel-end"
+                if snap.IsSome then
+                    match snap.Value with
+                    | SnapCenter -> "carousel-center"
+                    | SnapEnd -> "carousel-end"
                 if vertical = Some true then "carousel-vertical"
                 if class'.IsSome then class'.Value
             ]

@@ -52,11 +52,13 @@ module Navigation =
     /// Menu component - Menu list
     type Menu =
         [<SolidComponent>]
-        static member Invoke(?class': string, ?vertical: bool, ?horizontal: bool, ?size: Size) =
+        static member Invoke(?class': string, ?orientation: Orientation, ?size: Size) =
             let classes = [
                 "menu"
-                if vertical = Some true then "menu-vertical"
-                if horizontal = Some true then "menu-horizontal"
+                if orientation.IsSome then
+                    match orientation.Value with
+                    | Vertical -> "menu-vertical"
+                    | Horizontal -> "menu-horizontal"
                 if size.IsSome then CssClass.ofSize "menu" size.Value
                 if class'.IsSome then class'.Value
             ]
@@ -75,11 +77,13 @@ module Navigation =
     /// Steps component - Step indicator
     type Steps =
         [<SolidComponent>]
-        static member Invoke(?class': string, ?vertical: bool, ?horizontal: bool) =
+        static member Invoke(?class': string, ?orientation: Orientation) =
             let classes = [
                 "steps"
-                if vertical = Some true then "steps-vertical"
-                if horizontal = Some true then "steps-horizontal"
+                if orientation.IsSome then
+                    match orientation.Value with
+                    | Vertical -> "steps-vertical"
+                    | Horizontal -> "steps-horizontal"
                 if class'.IsSome then class'.Value
             ]
             ul(class' = CssClass.combine classes)

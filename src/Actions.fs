@@ -59,13 +59,15 @@ module Actions =
     /// Modal component - Dialog box
     type Modal =
         [<SolidComponent>]
-        static member Invoke(?class': string, ?``open``: bool, ?top: bool, ?middle: bool, ?bottom: bool) =
+        static member Invoke(?class': string, ?``open``: bool, ?position: ModalPosition) =
             let classes = [
                 "modal"
                 if ``open`` = Some true then "modal-open"
-                if top = Some true then "modal-top"
-                if middle = Some true then "modal-middle"
-                if bottom = Some true then "modal-bottom"
+                if position.IsSome then
+                    match position.Value with
+                    | ModalTop -> "modal-top"
+                    | ModalMiddle -> "modal-middle"
+                    | ModalBottom -> "modal-bottom"
                 if class'.IsSome then class'.Value
             ]
             dialog(class' = CssClass.combine classes)

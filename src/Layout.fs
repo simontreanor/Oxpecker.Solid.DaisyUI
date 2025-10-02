@@ -21,11 +21,13 @@ module Layout =
     /// Divider component - Visual separator
     type Divider =
         [<SolidComponent>]
-        static member Invoke(?class': string, ?vertical: bool, ?horizontal: bool) =
+        static member Invoke(?class': string, ?orientation: Orientation) =
             let classes = [
                 "divider"
-                if vertical = Some true then "divider-vertical"
-                if horizontal = Some true then "divider-horizontal"
+                if orientation.IsSome then
+                    match orientation.Value with
+                    | Vertical -> "divider-vertical"
+                    | Horizontal -> "divider-horizontal"
                 if class'.IsSome then class'.Value
             ]
             div(class' = CssClass.combine classes)
@@ -83,11 +85,13 @@ module Layout =
     /// Join component - Grouped elements
     type Join =
         [<SolidComponent>]
-        static member Invoke(?class': string, ?vertical: bool, ?horizontal: bool) =
+        static member Invoke(?class': string, ?orientation: Orientation) =
             let classes = [
                 "join"
-                if vertical = Some true then "join-vertical"
-                if horizontal = Some true then "join-horizontal"
+                if orientation.IsSome then
+                    match orientation.Value with
+                    | Vertical -> "join-vertical"
+                    | Horizontal -> "join-horizontal"
                 if class'.IsSome then class'.Value
             ]
             div(class' = CssClass.combine classes)

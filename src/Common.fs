@@ -43,6 +43,26 @@ type ModalPosition =
     | ModalMiddle
     | ModalBottom
 
+/// Orientation for components that support vertical/horizontal layout
+type Orientation =
+    | Vertical
+    | Horizontal
+
+/// Alignment for chat and similar components
+type Alignment =
+    | AlignStart
+    | AlignEnd
+
+/// Avatar status
+type AvatarStatus =
+    | Online
+    | Offline
+
+/// Carousel snap position
+type CarouselSnap =
+    | SnapCenter
+    | SnapEnd
+
 /// Helper module for CSS class manipulation
 module CssClass =
     /// Combine multiple CSS classes into a single string
