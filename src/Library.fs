@@ -4,7 +4,7 @@ namespace Oxpecker.Solid.DaisyUI
 /// Provides type-safe F# bindings for DaisyUI components in SolidJS applications
 [<AutoOpen>]
 module Library =
-    
+
     // Re-export all component modules for easy access
     open Actions
     open DataDisplay

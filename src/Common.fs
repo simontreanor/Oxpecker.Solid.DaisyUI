@@ -70,7 +70,7 @@ module CssClass =
         classes
         |> List.filter (fun s -> not (System.String.IsNullOrWhiteSpace s))
         |> String.concat " "
-    
+
     /// Convert ColorVariant to CSS class with prefix
     let ofColorVariant (prefix: string) (variant: ColorVariant) =
         match variant with
@@ -83,7 +83,7 @@ module CssClass =
         | Warning -> $"{prefix}-warning"
         | Error -> $"{prefix}-error"
         | ColorVariant.Ghost -> $"{prefix}-ghost"
-    
+
     /// Convert Size to CSS class with prefix
     let ofSize (prefix: string) (size: Size) =
         match size with
@@ -92,14 +92,14 @@ module CssClass =
         | Medium -> $"{prefix}-md"
         | Large -> $"{prefix}-lg"
         | ExtraLarge -> $"{prefix}-xl"
-    
+
     /// Convert ButtonStyle to CSS class
     let ofButtonStyle (style: ButtonStyle) =
         match style with
         | Outline -> "btn-outline"
         | ButtonStyle.Ghost -> "btn-ghost"
         | Link -> "btn-link"
-    
+
     /// Convert Position to CSS class with prefix
     let ofPosition (prefix: string) (position: Position) =
         match position with

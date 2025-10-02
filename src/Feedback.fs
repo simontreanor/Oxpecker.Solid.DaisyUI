@@ -5,7 +5,7 @@ open Oxpecker.Solid
 
 /// DaisyUI Feedback components
 module Feedback =
-    
+
     /// Alert component - Alert message
     type Alert =
         [<SolidComponent>]
@@ -19,10 +19,12 @@ module Feedback =
                     | Warning -> "alert-warning"
                     | Error -> "alert-error"
                     | _ -> ""
-                if class'.IsSome then class'.Value
+                if class'.IsSome then
+                    class'.Value
             ]
-            div(class' = CssClass.combine classes)
-    
+
+            div (class' = CssClass.combine classes)
+
     /// Loading spinner component
     type Loading =
         [<SolidComponent>]
@@ -37,7 +39,8 @@ module Feedback =
                 | Some "bars" -> "loading-bars"
                 | Some "infinity" -> "loading-infinity"
                 | _ -> "loading-spinner"
-                if size.IsSome then CssClass.ofSize "loading" size.Value
+                if size.IsSome then
+                    CssClass.ofSize "loading" size.Value
                 if color.IsSome then
                     match color.Value with
                     | Primary -> "text-primary"
@@ -48,26 +51,32 @@ module Feedback =
                     | Warning -> "text-warning"
                     | Error -> "text-error"
                     | _ -> ""
-                if class'.IsSome then class'.Value
+                if class'.IsSome then
+                    class'.Value
             ]
-            span(class' = CssClass.combine classes)
-    
+
+            span (class' = CssClass.combine classes)
+
     /// Progress bar component
     type Progress =
         [<SolidComponent>]
         static member Invoke(?class': string, ?color: ColorVariant) =
             let classes = [
                 "progress"
-                if color.IsSome then CssClass.ofColorVariant "progress" color.Value
-                if class'.IsSome then class'.Value
+                if color.IsSome then
+                    CssClass.ofColorVariant "progress" color.Value
+                if class'.IsSome then
+                    class'.Value
             ]
-            progress(class' = CssClass.combine classes)
-    
+
+            progress (class' = CssClass.combine classes)
+
     /// Radial progress component
     type RadialProgress =
         [<SolidComponent>]
         static member Invoke(value: int, ?class': string, ?color: ColorVariant, ?size: string) =
             let sizeValue = defaultArg size "12rem"
+
             let classes = [
                 "radial-progress"
                 if color.IsSome then
@@ -80,22 +89,26 @@ module Feedback =
                     | Warning -> "text-warning"
                     | Error -> "text-error"
                     | _ -> ""
-                if class'.IsSome then class'.Value
+                if class'.IsSome then
+                    class'.Value
             ]
+
             div(class' = CssClass.combine classes)
                 .attr("role", "progressbar")
-                .style'($"--value:{value}; --size:{sizeValue}")
-    
+                .style' ($"--value:{value}; --size:{sizeValue}")
+
     /// Skeleton component - Loading placeholder
     type Skeleton =
         [<SolidComponent>]
         static member Invoke(?class': string) =
             let classes = [
                 "skeleton"
-                if class'.IsSome then class'.Value
+                if class'.IsSome then
+                    class'.Value
             ]
-            div(class' = CssClass.combine classes)
-    
+
+            div (class' = CssClass.combine classes)
+
     /// Tooltip component
     type Tooltip =
         [<SolidComponent>]
@@ -109,8 +122,12 @@ module Feedback =
                     | Left -> "tooltip-left"
                     | Right -> "tooltip-right"
                     | _ -> ""
-                if color.IsSome then CssClass.ofColorVariant "tooltip" color.Value
-                if isOpen = Some true then "tooltip-open"
-                if class'.IsSome then class'.Value
+                if color.IsSome then
+                    CssClass.ofColorVariant "tooltip" color.Value
+                if isOpen = Some true then
+                    "tooltip-open"
+                if class'.IsSome then
+                    class'.Value
             ]
-            div(class' = CssClass.combine classes)
+
+            div (class' = CssClass.combine classes)
