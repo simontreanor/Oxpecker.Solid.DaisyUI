@@ -12,17 +12,14 @@ open Oxpecker.Solid.DaisyUI.Layout
 /// Hero section with title and description
 [<SolidComponent>]
 let HeroSection() =
-    Hero <| Fragment() {
-        div(class' = "hero-content text-center") {
-            div(class' = "max-w-md") {
-                h1(class' = "text-5xl font-bold") { "Hello DaisyUI!" }
-                p(class' = "py-6") {
+    div().hero() {
+        div().class'("hero-content text-center") {
+            div().class'("max-w-md") {
+                h1().class'("text-5xl font-bold") { "Hello DaisyUI!" }
+                p().class'("py-6") {
                     "Welcome to Oxpecker.Solid.DaisyUI - Build beautiful UIs with F# and DaisyUI"
                 }
-                let btn = DaisyButton()
-                btn.color <- Some Primary
-                btn.size <- Some Large
-                btn.render <| Fragment() {
+                button().btn(color = Primary, size = Large) {
                     "Get Started"
                 }
             }
@@ -32,26 +29,26 @@ let HeroSection() =
 /// Stats showcase
 [<SolidComponent>]
 let StatsSection() =
-    div(class' = "stats shadow w-full") {
-        Stat <| Fragment() {
-            div(class' = "stat-figure text-primary") {
-                svg(class' = "w-8 h-8") { }
+    div().stats().class'("shadow w-full") {
+        div().stat() {
+            div().class'("stat-figure text-primary") {
+                svg().class'("w-8 h-8") { }
             }
-            div(class' = "stat-title") { "Downloads" }
-            div(class' = "stat-value text-primary") { "31K" }
-            div(class' = "stat-desc") { "Jan 1st - Feb 1st" }
+            div().class'("stat-title") { "Downloads" }
+            div().class'("stat-value text-primary") { "31K" }
+            div().class'("stat-desc") { "Jan 1st - Feb 1st" }
         }
         
-        Stat <| Fragment() {
-            div(class' = "stat-title") { "New Users" }
-            div(class' = "stat-value text-secondary") { "4,200" }
-            div(class' = "stat-desc") { "↗︎ 400 (22%)" }
+        div().stat() {
+            div().class'("stat-title") { "New Users" }
+            div().class'("stat-value text-secondary") { "4,200" }
+            div().class'("stat-desc") { "↗︎ 400 (22%)" }
         }
         
-        Stat <| Fragment() {
-            div(class' = "stat-title") { "New Registers" }
-            div(class' = "stat-value") { "1,200" }
-            div(class' = "stat-desc") { "↘︎ 90 (14%)" }
+        div().stat() {
+            div().class'("stat-title") { "New Registers" }
+            div().class'("stat-value") { "1,200" }
+            div().class'("stat-desc") { "↘︎ 90 (14%)" }
         }
     }
 
@@ -61,26 +58,26 @@ let ModalExample() =
     let isOpen, setIsOpen = createSignal false
     
     Fragment() {
-        let openBtn = DaisyButton()
-        openBtn.color <- Some Primary
-        openBtn.render <| button(onClick = fun _ -> setIsOpen(true)) {
+        button().btn(color = Primary).onClick(fun _ -> setIsOpen(true)) {
             "Open Modal"
         }
         
-        let modal = DaisyModal()
-        modal.isOpen <- isOpen()
-        modal.middle <- true
-        modal.render <| Fragment() {
-            ModalBox <| Fragment() {
-                h3(class' = "font-bold text-lg") { "Congratulations!" }
-                p(class' = "py-4") {
-                    "You've opened a modal using Oxpecker.Solid.DaisyUI"
-                }
-                ModalAction <| Fragment() {
-                    let closeBtn = DaisyButton()
-                    closeBtn.render <| button(onClick = fun _ -> setIsOpen(false)) {
-                        "Close"
+        // Modal with backdrop
+        Show(``when`` = isOpen) <| Fragment() {
+            dialog().modal(isOpen = isOpen()).attr("open", "true") {
+                div().class'("modal-box") {
+                    h3().class'("font-bold text-lg") { "Congratulations!" }
+                    p().class'("py-4") {
+                        "You've opened a modal using Oxpecker.Solid.DaisyUI"
                     }
+                    div().class'("modal-action") {
+                        button().btn().onClick(fun _ -> setIsOpen(false)) {
+                            "Close"
+                        }
+                    }
+                }
+                form().class'("modal-backdrop").attr("method", "dialog") {
+                    button().onClick(fun _ -> setIsOpen(false)) { }
                 }
             }
         }
@@ -89,40 +86,37 @@ let ModalExample() =
 /// Card grid with various examples
 [<SolidComponent>]
 let CardGrid() =
-    div(class' = "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4") {
+    div().class'("grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4") {
         // Card 1: Basic Info
-        Card <| Fragment() {
-            div(class' = "card-body") {
-                CardTitle <| Fragment() { "Basic Card" }
+        div().card(bordered = true) {
+            div().class'("card-body") {
+                h2().cardTitle() { "Basic Card" }
                 p() { "This is a simple card component with title and text." }
-                div(class' = "card-actions justify-end") {
-                    let btn = DaisyButton()
-                    btn.color <- Some Primary
-                    btn.size <- Some Small
-                    btn.render <| Fragment() { "Learn More" }
+                div().class'("card-actions justify-end") {
+                    button().btn(color = Primary, size = Small) { "Learn More" }
                 }
             }
         }
         
         // Card 2: With Badge
-        Card <| Fragment() {
-            div(class' = "card-body") {
-                CardTitle <| Fragment() {
-                    "Featured"
-                    Badge <| Fragment() { "NEW" }
+        div().card(bordered = true) {
+            div().class'("card-body") {
+                h2().cardTitle() {
+                    span() { "Featured" }
+                    span().badge(color = Accent) { "NEW" }
                 }
                 p() { "Check out our latest features and updates." }
             }
         }
         
         // Card 3: With Stats
-        Card <| Fragment() {
-            div(class' = "card-body") {
-                CardTitle <| Fragment() { "Quick Stats" }
-                Stats <| Fragment() {
-                    Stat <| Fragment() {
-                        div(class' = "stat-value text-primary") { "89%" }
-                        div(class' = "stat-desc") { "Task completion" }
+        div().card(color = Primary) {
+            div().class'("card-body") {
+                h2().cardTitle() { "Quick Stats" }
+                div().stats() {
+                    div().stat() {
+                        div().class'("stat-value text-primary") { "89%" }
+                        div().class'("stat-desc") { "Task completion" }
                     }
                 }
             }
@@ -136,43 +130,40 @@ let FormExample() =
     let email, setEmail = createSignal ""
     let message, setMessage = createSignal ""
     
-    Card <| Fragment() {
-        div(class' = "card-body") {
-            CardTitle <| Fragment() { "Contact Form" }
+    div().card(bordered = true) {
+        div().class'("card-body") {
+            h2().cardTitle() { "Contact Form" }
             
-            form(class' = "space-y-4") {
-                div(class' = "form-control") {
-                    label(class' = "label") {
-                        span(class' = "label-text") { "Name" }
+            form().class'("space-y-4") {
+                div().class'("form-control") {
+                    label().class'("label") {
+                        span().class'("label-text") { "Name" }
                     }
-                    TextInput "Your name"
+                    input().textInput(placeholder = "Your name", bordered = true)
                 }
                 
-                div(class' = "form-control") {
-                    label(class' = "label") {
-                        span(class' = "label-text") { "Email" }
+                div().class'("form-control") {
+                    label().class'("label") {
+                        span().class'("label-text") { "Email" }
                     }
-                    input(type' = "email", class' = "input input-bordered", placeholder = "your@email.com")
+                    input().textInput(placeholder = "your@email.com", bordered = true, color = Primary)
                 }
                 
-                div(class' = "form-control") {
-                    label(class' = "label") {
-                        span(class' = "label-text") { "Message" }
+                div().class'("form-control") {
+                    label().class'("label") {
+                        span().class'("label-text") { "Message" }
                     }
-                    Textarea "Your message here..."
+                    textarea().textarea(placeholder = "Your message here...", bordered = true, rows = 4)
                 }
                 
-                div(class' = "form-control") {
-                    label(class' = "label cursor-pointer justify-start gap-2") {
-                        Checkbox <| Fragment() { }
-                        span(class' = "label-text") { "Subscribe to newsletter" }
+                div().class'("form-control") {
+                    label().class'("label cursor-pointer justify-start gap-2") {
+                        input().checkbox(color = Primary)
+                        span().class'("label-text") { "Subscribe to newsletter" }
                     }
                 }
                 
-                let submitBtn = DaisyButton()
-                submitBtn.color <- Some Primary
-                submitBtn.block <- true
-                submitBtn.render <| Fragment() { "Submit" }
+                button().btn(color = Primary, block = true) { "Submit" }
             }
         }
     }
@@ -180,20 +171,20 @@ let FormExample() =
 /// Navigation bar
 [<SolidComponent>]
 let AppNavbar() =
-    Navbar <| Fragment() {
-        div(class' = "flex-1") {
-            a(class' = "btn btn-ghost text-xl") { "Oxpecker.Solid.DaisyUI" }
+    div().navbar() {
+        div().class'("flex-1") {
+            a().class'("btn btn-ghost text-xl") { "Oxpecker.Solid.DaisyUI" }
         }
-        div(class' = "flex-none") {
-            Menu <| Fragment() {
+        div().class'("flex-none") {
+            ul().menu(horizontal = true).class'("px-1") {
                 li() {
-                    Link "#home" <| Fragment() { "Home" }
+                    a().link(hover = true).href("#home") { "Home" }
                 }
                 li() {
-                    Link "#docs" <| Fragment() { "Docs" }
+                    a().link(hover = true).href("#docs") { "Docs" }
                 }
                 li() {
-                    Link "#examples" <| Fragment() { "Examples" }
+                    a().link(hover = true).href("#examples") { "Examples" }
                 }
             }
         }
@@ -202,23 +193,23 @@ let AppNavbar() =
 /// Main application
 [<SolidComponent>]
 let App() =
-    div(class' = "min-h-screen bg-base-200") {
+    div().class'("min-h-screen bg-base-200") {
         AppNavbar()
         
-        div(class' = "container mx-auto p-4 space-y-8") {
+        div().class'("container mx-auto p-4 space-y-8") {
             HeroSection()
             
             StatsSection()
             
-            div(class' = "flex gap-4") {
+            div().class'("flex gap-4") {
                 ModalExample()
                 
-                let dropdownDemo = DaisyDropdown()
-                dropdownDemo.render <| Fragment() {
-                    let btn = DaisyButton()
-                    btn.render <| Fragment() { "Open Dropdown" }
+                // Dropdown example
+                div().class'("dropdown") {
+                    button().btn(color = Secondary).attr("tabindex", "0") { "Open Dropdown" }
                     
-                    DropdownContent <| Fragment() {
+                    ul().class'("dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow")
+                       .attr("tabindex", "0") {
                         li() { a() { "Item 1" } }
                         li() { a() { "Item 2" } }
                         li() { a() { "Item 3" } }
@@ -230,16 +221,17 @@ let App() =
             
             FormExample()
             
-            Footer <| Fragment() {
-                div(class' = "footer-center p-4") {
+            footer().footer(center = true).class'("p-4") {
+                div() {
                     p() { "Built with Oxpecker.Solid.DaisyUI ❤️" }
                 }
             }
         }
         
-        Toast <| Fragment() {
-            Alert <| Fragment() {
+        div().toast(position = TopEnd) {
+            div().alert(color = Success) {
                 span() { "✓ App loaded successfully!" }
             }
         }
     }
+

@@ -66,24 +66,22 @@ open Oxpecker.Solid.DaisyUI.Feedback
 
 [<SolidComponent>]
 let App() =
-    div(class' = "container mx-auto p-4") {
+    div().class'("container mx-auto p-4") {
         // DaisyUI Card with Button
-        Card <| Fragment() {
-            CardBody <| Fragment() {
-                CardTitle <| Fragment() { "Welcome to DaisyUI!" }
+        div().card(bordered = true) {
+            div().class'("card-body") {
+                h2().cardTitle() { "Welcome to DaisyUI!" }
                 p() { "This is a card component built with Oxpecker.Solid.DaisyUI" }
                 
-                // Using the type-based Button component
-                let btn = DaisyButton()
-                btn.color <- Some Primary
-                btn.render <| Fragment() {
+                // Clean button syntax with optional parameters
+                button().btn(color = Primary, size = Large) {
                     "Click Me!"
                 }
             }
         }
         
         // Alert component
-        Alert <| Fragment() {
+        div().alert(color = Success) {
             span() { "✓ Your application is ready!" }
         }
     }
@@ -92,65 +90,67 @@ let App() =
 ## Component Categories
 
 ### Actions
-Components for user interactions:
-- **DaisyButton** - Buttons with various styles and colors
-- **DaisyDropdown** - Dropdown menus
-- **DaisyModal** - Modal dialogs
-- **DaisySwap** - Swap/toggle animations
-- **ThemeController** - Theme switching control
+Components for user interactions using clean extension methods:
+- **button().btn()** - Buttons with various styles and colors
+- **div().dropdown()** - Dropdown menus (use with dropdown classes)
+- **dialog().modal()** - Modal dialogs
+- **label().swap()** - Swap/toggle animations
+- **input().themeController()** - Theme switching control
 
 ### Data Display
 Components for showing data:
-- **Badge** - Small status indicators
-- **Card** - Content containers
-- **Avatar** - User profile images
-- **Stat** / **Stats** - Statistics display
-- **Table** - Data tables
-- **Timeline** - Event timelines
+- **span().badge()** - Small status indicators
+- **div().card()** - Content containers
+- **h2().cardTitle()** - Card titles
+- **div().avatar()** - User profile images
+- **div().stat() / div().stats()** - Statistics display
+- **table().table()** - Data tables
+- **ul().timeline()** - Event timelines
 
 ### Data Input
 Form input components:
-- **Checkbox** - Checkbox inputs
-- **Radio** - Radio button inputs
-- **TextInput** - Text input fields
-- **Textarea** - Multi-line text areas
-- **Select** - Dropdown selects
-- **Range** - Range sliders
-- **Toggle** - Toggle switches
-- **FileInput** - File upload inputs
-- **Rating** - Star ratings
+- **input().checkbox()** - Checkbox inputs
+- **input().radio()** - Radio button inputs
+- **input().textInput()** - Text input fields
+- **textarea().textarea()** - Multi-line text areas
+- **select().select()** - Dropdown selects
+- **input().range()** - Range sliders
+- **input().toggle()** - Toggle switches
+- **input().fileInput()** - File upload inputs
+- **div().rating()** - Star ratings
 
 ### Layout
 Page layout components:
-- **Artboard** - Mobile mockup frames
-- **Divider** - Content dividers
-- **Drawer** - Side drawers
-- **Footer** - Page footers
-- **Hero** - Hero sections
-- **Indicator** - Badge indicators
-- **Join** - Grouped items
-- **Stack** - Stacked items
-- **Toast** - Toast notifications
+- **div().artboard()** - Mobile mockup frames
+- **div().divider()** - Content dividers
+- **div().drawer()** - Side drawers
+- **footer().footer()** - Page footers
+- **div().hero()** - Hero sections
+- **div().indicator()** - Badge indicators
+- **div().join()** - Grouped items
+- **div().stack()** - Stacked items
+- **div().toast()** - Toast notifications
 
 ### Navigation
 Navigation components:
-- **Breadcrumbs** - Breadcrumb navigation
-- **BottomNav** - Bottom navigation bars
-- **Link** - Styled links
-- **Menu** - Menu lists
-- **Navbar** - Navigation bars
-- **Pagination** - Page navigation
-- **Steps** - Step indicators
-- **Tabs** - Tab navigation
+- **div().breadcrumbs()** - Breadcrumb navigation
+- **div().btmNav()** - Bottom navigation bars
+- **a().link()** - Styled links
+- **ul().menu()** - Menu lists
+- **div().navbar()** - Navigation bars
+- **ul().steps()** - Step indicators
+- **li().step()** - Individual step items
+- **div().tabs()** - Tab navigation
+- **a().tab()** - Individual tab items
 
 ### Feedback
 User feedback components:
-- **Alert** - Alert messages
-- **Loading** - Loading spinners
-- **Progress** - Progress bars
-- **RadialProgress** - Circular progress
-- **Skeleton** - Loading placeholders
-- **Tooltip** - Hover tooltips
+- **div().alert()** - Alert messages
+- **span().loading()** - Loading spinners
+- **progress().progress()** - Progress bars
+- **div().radialProgress()** - Circular progress
+- **div().skeleton()** - Loading placeholders
+- **div().tooltip()** - Hover tooltips
 
 ## Component Usage Examples
 
@@ -161,12 +161,7 @@ open Oxpecker.Solid.DaisyUI.Actions
 
 [<SolidComponent>]
 let MyButton() =
-    let btn = DaisyButton()
-    btn.color <- Some Primary
-    btn.size <- Some Large
-    btn.wide <- true
-    
-    btn.render <| Fragment() {
+    button().btn(color = Primary, size = Large, wide = true) {
         "Large Primary Button"
     }
 ```
@@ -183,23 +178,19 @@ let MyModal() =
     
     Fragment() {
         // Trigger button
-        let btn = DaisyButton()
-        btn.color <- Some Primary
-        btn.render <| button(onClick = fun _ -> setIsOpen(not (isOpen()))) {
+        button().btn(color = Primary).onClick(fun _ -> setIsOpen(not (isOpen()))) {
             "Open Modal"
         }
         
         // Modal
-        let modal = DaisyModal()
-        modal.isOpen <- isOpen()
-        modal.render <| Fragment() {
-            ModalBox <| Fragment() {
-                h3(class' = "font-bold text-lg") { "Hello!" }
-                p(class' = "py-4") { "This is a modal dialog" }
-                ModalAction <| Fragment() {
-                    let closeBtn = DaisyButton()
-                    closeBtn.render <| button(onClick = fun _ -> setIsOpen(false)) {
-                        "Close"
+        Show(``when`` = isOpen) <| Fragment() {
+            dialog().modal(isOpen = isOpen()).attr("open", "true") {
+                div().class'("modal-box") {
+                    h3().class'("font-bold text-lg") { "Hello!" }
+                    p().class'("py-4") { "This is a modal dialog" }
+                    div().class'("modal-action") {
+                        button().btn().onClick(fun _ -> setIsOpen(false)) {
+                            "Close"
                     }
                 }
             }
@@ -214,20 +205,20 @@ open Oxpecker.Solid.DaisyUI.DataDisplay
 
 [<SolidComponent>]
 let StatsCard() =
-    Card <| Fragment() {
-        CardBody <| Fragment() {
-            CardTitle <| Fragment() { "Statistics" }
+    div().card(bordered = true) {
+        div().class'("card-body") {
+            h2().cardTitle() { "Statistics" }
             
-            Stats <| Fragment() {
-                Stat <| Fragment() {
-                    div(class' = "stat-title") { "Total Users" }
-                    div(class' = "stat-value") { "25.6K" }
-                    div(class' = "stat-desc") { "↗︎ 400 (22%)" }
+            div().stats() {
+                div().stat() {
+                    div().class'("stat-title") { "Total Users" }
+                    div().class'("stat-value") { "25.6K" }
+                    div().class'("stat-desc") { "↗︎ 400 (22%)" }
                 }
-                Stat <| Fragment() {
-                    div(class' = "stat-title") { "Page Views" }
-                    div(class' = "stat-value") { "2.6M" }
-                    div(class' = "stat-desc") { "↗︎ 90 (14%)" }
+                div().stat() {
+                    div().class'("stat-title") { "Page Views" }
+                    div().class'("stat-value") { "2.6M" }
+                    div().class'("stat-desc") { "↗︎ 90 (14%)" }
                 }
             }
         }
@@ -244,36 +235,33 @@ let MyForm() =
     let name, setName = createSignal ""
     let agreed, setAgreed = createSignal false
     
-    form(class' = "space-y-4") {
-        div(class' = "form-control") {
-            label(class' = "label") {
-                span(class' = "label-text") { "Your Name" }
+    form().class'("space-y-4") {
+        div().class'("form-control") {
+            label().class'("label") {
+                span().class'("label-text") { "Your Name" }
             }
-            TextInput "Enter your name"
+            input().textInput(placeholder = "Enter your name", bordered = true)
         }
         
-        div(class' = "form-control") {
-            label(class' = "label cursor-pointer") {
-                span(class' = "label-text") { "I agree to terms" }
-                Checkbox <| Fragment() { }
+        div().class'("form-control") {
+            label().class'("label cursor-pointer") {
+                span().class'("label-text") { "I agree to terms" }
+                input().checkbox(color = Primary)
             }
         }
         
-        div(class' = "form-control") {
-            label(class' = "label") {
-                span(class' = "label-text") { "Select option" }
+        div().class'("form-control") {
+            label().class'("label") {
+                span().class'("label-text") { "Select option" }
             }
-            Select <| Fragment() {
+            select().select(bordered = true) {
                 option() { "Option 1" }
                 option() { "Option 2" }
                 option() { "Option 3" }
             }
         }
         
-        let submitBtn = DaisyButton()
-        submitBtn.color <- Some Primary
-        submitBtn.block <- true
-        submitBtn.render <| Fragment() {
+        button().btn(color = Primary, block = true) {
             "Submit"
         }
     }

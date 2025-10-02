@@ -6,139 +6,132 @@ open Oxpecker.Solid
 /// DaisyUI Actions components
 module Actions =
     
-    /// DaisyUI Button component
-    type DaisyButton() =
-        member val color: ColorVariant option = None with get, set
-        member val size: Size option = None with get, set
-        member val style: ButtonStyle option = None with get, set
-        member val wide = false with get, set
-        member val block = false with get, set
-        member val circle = false with get, set
-        member val square = false with get, set
-        member val loading = false with get, set
-        member val disabled = false with get, set
-        member val active = false with get, set
-        member val noAnimation = false with get, set
-        
-        [<SolidComponent>]
-        member this.render(children: #HtmlElement) =
+    /// Creates a DaisyUI button element with optional modifiers
+    type button with
+        /// Apply button with color variant
+        [<Erase>]
+        member this.btn(?color: ColorVariant, ?size: Size, ?style: ButtonStyle, ?wide: bool, ?block: bool, ?circle: bool, ?square: bool, ?loading: bool, ?active: bool, ?noAnimation: bool) =
             let classes = [
                 "btn"
-                if this.color.IsSome then CssClass.ofColorVariant this.color.Value
-                if this.size.IsSome then CssClass.ofSize this.size.Value
-                if this.style.IsSome then CssClass.ofButtonStyle this.style.Value
-                if this.wide then "btn-wide"
-                if this.block then "btn-block"
-                if this.circle then "btn-circle"
-                if this.square then "btn-square"
-                if this.loading then "loading"
-                if this.active then "btn-active"
-                if this.noAnimation then "no-animation"
+                if color.IsSome then CssClass.ofColorVariant color.Value
+                if size.IsSome then CssClass.ofSize size.Value
+                if style.IsSome then CssClass.ofButtonStyle style.Value
+                if wide = Some true then "btn-wide"
+                if block = Some true then "btn-block"
+                if circle = Some true then "btn-circle"
+                if square = Some true then "btn-square"
+                if loading = Some true then "loading"
+                if active = Some true then "btn-active"
+                if noAnimation = Some true then "no-animation"
             ]
-            
-            button(class' = CssClass.combine classes).bool("disabled", this.disabled) {
-                children
-            }
+            this.class' <- CssClass.combine classes
+            this
     
-    /// DaisyUI Dropdown component  
-    type DaisyDropdown() =
-        member val position: Position option = None with get, set
-        member val hover = false with get, set
-        member val isOpen = false with get, set
-        
-        [<SolidComponent>]
-        member this.render(children: #HtmlElement) =
+    /// Creates a DaisyUI dropdown wrapper
+    type div with
+        /// Apply dropdown styles
+        [<Erase>]
+        member this.dropdown(?position: Position, ?hover: bool, ?isOpen: bool) =
             let classes = [
                 "dropdown"
-                if this.position.IsSome then CssClass.ofPosition this.position.Value
-                if this.hover then "dropdown-hover"
-                if this.isOpen then "dropdown-open"
+                if position.IsSome then CssClass.ofPosition position.Value
+                if hover = Some true then "dropdown-hover"
+                if isOpen = Some true then "dropdown-open"
             ]
-            
-            div(class' = CssClass.combine classes) {
-                children
-            }
-    
-    /// Create a dropdown content container
-    [<SolidComponent>]
-    let DropdownContent (children: #HtmlElement) =
-        ul(class' = "dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow") {
-            children
-        }
-    
-    /// DaisyUI Modal component
-    type DaisyModal() =
-        member val isOpen = false with get, set
-        member val bottom = false with get, set
-        member val middle = false with get, set
+            this.class' <- CssClass.combine classes
+            this
         
-        [<SolidComponent>]
-        member this.render(children: #HtmlElement) =
+        /// Apply modal styles
+        [<Erase>]
+        member this.modal(?isOpen: bool, ?bottom: bool, ?middle: bool) =
             let classes = [
                 "modal"
-                if this.isOpen then "modal-open"
-                if this.bottom then "modal-bottom"
-                if this.middle then "modal-middle"
+                if isOpen = Some true then "modal-open"
+                if bottom = Some true then "modal-bottom"
+                if middle = Some true then "modal-middle"
             ]
-            
-            dialog(class' = CssClass.combine classes) {
-                children
-            }
-    
-    /// Create a modal box
-    [<SolidComponent>]
-    let ModalBox (children: #HtmlElement) =
-        div(class' = "modal-box") {
-            children
-        }
-    
-    /// Create a modal action area
-    [<SolidComponent>]
-    let ModalAction (children: #HtmlElement) =
-        div(class' = "modal-action") {
-            children
-        }
-    
-    /// Create a modal backdrop
-    [<SolidComponent>]
-    let ModalBackdrop() =
-        form(method = "dialog", class' = "modal-backdrop")
-    
-    /// DaisyUI Swap component
-    type DaisySwap() =
-        member val active = false with get, set
-        member val rotate = false with get, set
-        member val flip = false with get, set
+            this.class' <- CssClass.combine classes
+            this
         
-        [<SolidComponent>]
-        member this.render(children: #HtmlElement) =
+        /// Apply modal box styles
+        [<Erase>]
+        member this.modalBox() =
+            this.class' <- "modal-box"
+            this
+        
+        /// Apply modal action styles
+        [<Erase>]
+        member this.modalAction() =
+            this.class' <- "modal-action"
+            this
+        
+        /// Apply swap styles
+        [<Erase>]
+        member this.swap(?active: bool, ?rotate: bool, ?flip: bool) =
             let classes = [
                 "swap"
-                if this.active then "swap-active"
-                if this.rotate then "swap-rotate"
-                if this.flip then "swap-flip"
+                if active = Some true then "swap-active"
+                if rotate = Some true then "swap-rotate"
+                if flip = Some true then "swap-flip"
             ]
-            
-            label(class' = CssClass.combine classes) {
-                children
-            }
+            this.class' <- CssClass.combine classes
+            this
+        
+        /// Apply swap-on styles
+        [<Erase>]
+        member this.swapOn() =
+            this.class' <- "swap-on"
+            this
+        
+        /// Apply swap-off styles
+        [<Erase>]
+        member this.swapOff() =
+            this.class' <- "swap-off"
+            this
     
-    /// Create a swap on element
-    [<SolidComponent>]
-    let SwapOn (children: #HtmlElement) =
-        div(class' = "swap-on") {
-            children
-        }
+    /// Creates a dropdown content container
+    type ul with
+        /// Apply dropdown content styles
+        [<Erase>]
+        member this.dropdownContent() =
+            this.class' <- "dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow"
+            this
     
-    /// Create a swap off element
-    [<SolidComponent>]
-    let SwapOff (children: #HtmlElement) =
-        div(class' = "swap-off") {
-            children
-        }
+    /// Modal as dialog element
+    type dialog with
+        /// Apply modal styles
+        [<Erase>]
+        member this.modal(?isOpen: bool, ?bottom: bool, ?middle: bool) =
+            let classes = [
+                "modal"
+                if isOpen = Some true then "modal-open"
+                if bottom = Some true then "modal-bottom"
+                if middle = Some true then "modal-middle"
+            ]
+            this.class' <- CssClass.combine classes
+            this
     
-    /// Theme controller component
-    [<SolidComponent>]
-    let ThemeController (themeName: string) =
-        input(type' = "checkbox", class' = "theme-controller", value = themeName)
+    /// Swap as label element
+    type label with
+        /// Apply swap styles
+        [<Erase>]
+        member this.swap(?active: bool, ?rotate: bool, ?flip: bool) =
+            let classes = [
+                "swap"
+                if active = Some true then "swap-active"
+                if rotate = Some true then "swap-rotate"
+                if flip = Some true then "swap-flip"
+            ]
+            this.class' <- CssClass.combine classes
+            this
+    
+    /// Theme controller as input
+    type input with
+        /// Apply theme controller styles
+        [<Erase>]
+        member this.themeController(themeName: string) =
+            this.type' <- "checkbox"
+            this.class' <- "theme-controller"
+            this.value <- themeName
+            this
 

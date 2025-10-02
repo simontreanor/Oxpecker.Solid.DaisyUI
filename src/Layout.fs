@@ -6,65 +6,101 @@ open Oxpecker.Solid
 /// DaisyUI Layout components
 module Layout =
     
-    /// DaisyUI Artboard component
-    [<SolidComponent>]
-    let Artboard (children: #HtmlElement) =
-        div(class' = "artboard") {
-            children
-        }
+    /// Div layout extensions
+    type div with
+        /// Apply artboard styles
+        [<Erase>]
+        member this.artboard(?phone: bool, ?horizontal: bool) =
+            let classes = [
+                "artboard"
+                if phone = Some true then "artboard-demo phone-1"
+                if horizontal = Some true then "artboard-horizontal"
+            ]
+            this.class' <- CssClass.combine classes
+            this
+        
+        /// Apply divider styles
+        [<Erase>]
+        member this.divider(?vertical: bool, ?horizontal: bool) =
+            let classes = [
+                "divider"
+                if vertical = Some true then "divider-vertical"
+                if horizontal = Some true then "divider-horizontal"
+            ]
+            this.class' <- CssClass.combine classes
+            this
+        
+        /// Apply drawer styles
+        [<Erase>]
+        member this.drawer(?isEnd: bool) =
+            let classes = [
+                "drawer"
+                if isEnd = Some true then "drawer-end"
+            ]
+            this.class' <- CssClass.combine classes
+            this
+        
+        /// Apply hero styles
+        [<Erase>]
+        member this.hero(?overlay: bool) =
+            let classes = [
+                "hero"
+                if overlay = Some true then "hero-overlay"
+            ]
+            this.class' <- CssClass.combine classes
+            this
+        
+        /// Apply indicator styles
+        [<Erase>]
+        member this.indicator() =
+            this.class' <- "indicator"
+            this
+        
+        /// Apply join styles
+        [<Erase>]
+        member this.join(?vertical: bool, ?horizontal: bool) =
+            let classes = [
+                "join"
+                if vertical = Some true then "join-vertical"
+                if horizontal = Some true then "join-horizontal"
+            ]
+            this.class' <- CssClass.combine classes
+            this
+        
+        /// Apply stack styles
+        [<Erase>]
+        member this.stack() =
+            this.class' <- "stack"
+            this
+        
+        /// Apply toast styles
+        [<Erase>]
+        member this.toast(?position: Position) =
+            let classes = [
+                "toast"
+                if position.IsSome then
+                    match position.Value with
+                    | Top -> "toast-top"
+                    | Bottom -> "toast-bottom"
+                    | Left -> "toast-start"
+                    | Right -> "toast-end"
+                    | TopStart -> "toast-top toast-start"
+                    | TopEnd -> "toast-top toast-end"
+                    | BottomStart -> "toast-bottom toast-start"
+                    | BottomEnd -> "toast-bottom toast-end"
+                    | _ -> ""
+            ]
+            this.class' <- CssClass.combine classes
+            this
     
-    /// DaisyUI Divider component
-    [<SolidComponent>]
-    let Divider (text: string) =
-        div(class' = "divider") {
-            text
-        }
-    
-    /// DaisyUI Drawer component
-    [<SolidComponent>]
-    let Drawer (children: #HtmlElement) =
-        div(class' = "drawer") {
-            children
-        }
-    
-    /// DaisyUI Footer component
-    [<SolidComponent>]
-    let Footer (children: #HtmlElement) =
-        footer(class' = "footer") {
-            children
-        }
-    
-    /// DaisyUI Hero component
-    [<SolidComponent>]
-    let Hero (children: #HtmlElement) =
-        div(class' = "hero") {
-            children
-        }
-    
-    /// DaisyUI Indicator component
-    [<SolidComponent>]
-    let Indicator (children: #HtmlElement) =
-        div(class' = "indicator") {
-            children
-        }
-    
-    /// DaisyUI Join component
-    [<SolidComponent>]
-    let Join (children: #HtmlElement) =
-        div(class' = "join") {
-            children
-        }
-    
-    /// DaisyUI Stack component
-    [<SolidComponent>]
-    let Stack (children: #HtmlElement) =
-        div(class' = "stack") {
-            children
-        }
-    
-    /// DaisyUI Toast component
-    [<SolidComponent>]
-    let Toast (children: #HtmlElement) =
-        div(class' = "toast") {
-            children
-        }
+    /// Footer extensions
+    type footer with
+        /// Apply footer styles
+        [<Erase>]
+        member this.footer(?center: bool) =
+            let classes = [
+                "footer"
+                if center = Some true then "footer-center"
+            ]
+            this.class' <- CssClass.combine classes
+            this
