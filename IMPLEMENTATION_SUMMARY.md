@@ -2,13 +2,20 @@
 
 ## 🎉 Achievement: 100% Coverage of All DaisyUI Components!
 
-The Oxpecker.Solid.DaisyUI library now implements **ALL 72 main DaisyUI components** with **37 part types**, providing complete coverage of the entire DaisyUI framework for F# SolidJS applications.
+The Oxpecker.Solid.DaisyUI library now implements **ALL 73 main DaisyUI components** with **37 part types**, providing complete coverage of the entire DaisyUI framework for F# SolidJS applications.
 
 ---
 
 ## Final Components Added
 
-### Data Input (3 new components + 2 part types)
+### Actions (1 new component)
+
+**ThemeController:**
+- ✅ `ThemeController` - Checkbox/radio input for CSS-based theme switching
+  - Applies `theme-controller` class to enable page theme control
+  - Works with DaisyUI's built-in theme system
+
+### Data Input (3 components + 2 part types)
 
 **Filter System:**
 - ✅ `Filter` - Group of radio buttons for filtering items
@@ -24,8 +31,8 @@ The Oxpecker.Solid.DaisyUI library now implements **ALL 72 main DaisyUI componen
 
 ## Complete Module Breakdown
 
-### ✅ Actions.fs (6 components + 11 parts)
-- Button, Dropdown, Modal, Swap, Fab, Collapse
+### ✅ Actions.fs (7 components + 11 parts)
+- Button, Dropdown, Modal, Swap, Fab, Collapse, ThemeController
 - **100% Coverage**
 
 ### ✅ DataDisplay.fs (18 components + 16 parts)
@@ -64,10 +71,10 @@ The Oxpecker.Solid.DaisyUI library now implements **ALL 72 main DaisyUI componen
 ## Statistics
 
 - **Total Modules:** 7
-- **Total Components:** 72
+- **Total Components:** 73
 - **Total Part Types:** 37
-- **Total Elements:** 109
-- **Overall Coverage:** **100%** (72/72 DaisyUI components) 🎉
+- **Total Elements:** 110
+- **Overall Coverage:** **100%** (73/73 DaisyUI components) 🎉
 
 ---
 

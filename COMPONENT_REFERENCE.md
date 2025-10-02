@@ -12,6 +12,7 @@ All DaisyUI components use **PascalCase** naming to:
 
 ### Actions
 - **Button** - `Button(color = Primary, size = Large) { "Text" }`
+- **ThemeController** - `ThemeController(value = "dark")`
 
 ### Data Display
 - **Badge** - `Badge(color = Success) { "New" }`

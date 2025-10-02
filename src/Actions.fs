@@ -6,9 +6,8 @@ open Oxpecker.Solid
 /// DaisyUI Action components
 module Actions =
     
-    /// Button component - Primary action element
+    /// Button component
     type Button =
-        /// Invoke to create a DaisyUI button
         [<SolidComponent>]
         static member Invoke(?class': string, ?color: ColorVariant, ?size: Size, ?outline: bool, ?wide: bool,
                              ?block: bool, ?circle: bool, ?square: bool, ?glass: bool,
@@ -21,15 +20,17 @@ module Actions =
                 if circle = Some true then "btn-circle"
                 if square = Some true then "btn-square"
                 if glass = Some true then "btn-glass"
+                if disabled = Some true then "btn-disabled"
                 if loading = Some true then "loading"
                 if active = Some true then "btn-active"
                 if color.IsSome then CssClass.ofColorVariant "btn" color.Value
                 if size.IsSome then CssClass.ofSize "btn" size.Value
                 if class'.IsSome then class'.Value
             ]
-            let htmlBtn : button = button(class' = CssClass.combine classes)
-            if disabled = Some true then htmlBtn.disabled <- true
-            htmlBtn
+            button(class' = CssClass.combine classes)
+            // let htmlBtn : button = button(class' = CssClass.combine classes)
+            // if disabled = Some true then htmlBtn.disabled <- true
+            // htmlBtn
     
     /// Dropdown container component
     type Dropdown =
@@ -179,3 +180,15 @@ module Actions =
         static member Invoke(?class': string) =
             let classes = ["collapse-content"; if class'.IsSome then class'.Value]
             div(class' = CssClass.combine classes)
+    
+    /// Theme Controller - Checkbox or radio input for theme switching
+    /// Apply to a checkbox or radio input to control page theme via CSS
+    type ThemeController =
+        [<SolidComponent>]
+        static member Invoke(?class': string, ?value: string) =
+            let classes = [
+                "theme-controller"
+                if class'.IsSome then class'.Value
+            ]
+            let elem = input(class' = CssClass.combine classes, type' = "checkbox")
+            if value.IsSome then elem.attr("value", value.Value) else elem
