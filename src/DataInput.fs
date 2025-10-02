@@ -6,8 +6,8 @@ open Oxpecker.Solid
 /// DaisyUI Data Input components
 module DataInput =
     
-    /// Checkbox component
-    type checkbox =
+    /// Checkbox component - Checkbox input
+    type Checkbox =
         [<SolidComponent>]
         static member Invoke(?color: ColorVariant, ?size: Size) =
             let classes = [
@@ -18,7 +18,7 @@ module DataInput =
             input(class' = CssClass.combine classes, type' = "checkbox")
     
     /// Radio button component
-    type radio =
+    type Radio =
         [<SolidComponent>]
         static member Invoke(?name: string, ?color: ColorVariant, ?size: Size) =
             let classes = [
@@ -31,7 +31,7 @@ module DataInput =
             inp
     
     /// Text input component
-    type textInput =
+    type TextInput =
         [<SolidComponent>]
         static member Invoke(?placeholder: string, ?bordered: bool, ?ghost: bool, ?color: ColorVariant, ?size: Size) =
             let classes = [
@@ -46,7 +46,7 @@ module DataInput =
             inp
     
     /// Textarea component
-    type textarea_input =
+    type Textarea =
         [<SolidComponent>]
         static member Invoke(?placeholder: string, ?bordered: bool, ?ghost: bool, ?color: ColorVariant, ?size: Size, ?rows: int) =
             let classes = [
@@ -60,8 +60,8 @@ module DataInput =
             let ta = if placeholder.IsSome then ta.placeholder <- placeholder.Value; ta else ta
             if rows.IsSome then ta.rows <- rows.Value; ta else ta
     
-    /// Select component
-    type select =
+    /// Select component (no conflict with PascalCase)
+    type Select =
         [<SolidComponent>]
         static member Invoke(?bordered: bool, ?ghost: bool, ?color: ColorVariant, ?size: Size) =
             let classes = [
@@ -74,7 +74,7 @@ module DataInput =
             select(class' = CssClass.combine classes)
     
     /// Range slider component
-    type range =
+    type Range =
         [<SolidComponent>]
         static member Invoke(?min: int, ?max: int, ?step: int, ?color: ColorVariant, ?size: Size) =
             let classes = [
@@ -88,7 +88,7 @@ module DataInput =
             if step.IsSome then rng.step <- string step.Value; rng else rng
     
     /// Toggle switch component
-    type toggle =
+    type Toggle =
         [<SolidComponent>]
         static member Invoke(?color: ColorVariant, ?size: Size) =
             let classes = [
@@ -99,7 +99,7 @@ module DataInput =
             input(class' = CssClass.combine classes, type' = "checkbox")
     
     /// File input component
-    type fileInput =
+    type FileInput =
         [<SolidComponent>]
         static member Invoke(?bordered: bool, ?ghost: bool, ?color: ColorVariant, ?size: Size) =
             let classes = [
@@ -112,7 +112,7 @@ module DataInput =
             input(class' = CssClass.combine classes, type' = "file")
     
     /// Rating component
-    type rating =
+    type Rating =
         [<SolidComponent>]
         static member Invoke(?size: Size, ?half: bool) =
             let classes = [

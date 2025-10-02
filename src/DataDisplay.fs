@@ -6,8 +6,8 @@ open Oxpecker.Solid
 /// DaisyUI Data Display components  
 module DataDisplay =
     
-    /// Badge component
-    type badge =
+    /// Badge component - Small status indicator
+    type Badge =
         [<SolidComponent>]
         static member Invoke(?color: ColorVariant, ?size: Size, ?outline: bool) =
             let classes = [
@@ -18,8 +18,8 @@ module DataDisplay =
             ]
             span(class' = CssClass.combine classes)
     
-    /// Card component
-    type card =
+    /// Card component - Content container
+    type Card =
         [<SolidComponent>]
         static member Invoke(?bordered: bool, ?imageFull: bool, ?color: ColorVariant, ?compact: bool, ?side: bool) =
             let classes = [
@@ -39,19 +39,22 @@ module DataDisplay =
             div(class' = CssClass.combine classes)
     
     /// Card body component
-    [<SolidComponent>]
-    let cardBody() = div(class' = "card-body")
+    type CardBody =
+        [<SolidComponent>]
+        static member Invoke() = div(class' = "card-body")
     
     /// Card title component
-    [<SolidComponent>]
-    let cardTitle() = h2(class' = "card-title")
+    type CardTitle =
+        [<SolidComponent>]
+        static member Invoke() = h2(class' = "card-title")
     
     /// Card actions component
-    [<SolidComponent>]
-    let cardActions() = div(class' = "card-actions")
+    type CardActions =
+        [<SolidComponent>]
+        static member Invoke() = div(class' = "card-actions")
     
-    /// Avatar component
-    type avatar =
+    /// Avatar component - Profile image container
+    type Avatar =
         [<SolidComponent>]
         static member Invoke(?online: bool, ?offline: bool, ?placeholder: bool) =
             let classes = [
@@ -63,7 +66,7 @@ module DataDisplay =
             div(class' = CssClass.combine classes)
     
     /// Stats container component
-    type stats =
+    type Stats =
         [<SolidComponent>]
         static member Invoke(?vertical: bool, ?horizontal: bool) =
             let classes = [
@@ -74,11 +77,12 @@ module DataDisplay =
             div(class' = CssClass.combine classes)
     
     /// Stat item component
-    [<SolidComponent>]
-    let stat() = div(class' = "stat")
+    type Stat =
+        [<SolidComponent>]
+        static member Invoke() = div(class' = "stat")
     
-    /// Table component - rename to avoid shadowing
-    type daisy_table =
+    /// Table component - Data table (no conflict with PascalCase)
+    type Table =
         [<SolidComponent>]
         static member Invoke(?zebra: bool, ?pinRows: bool, ?pinCols: bool, ?size: Size) =
             let classes = [
@@ -90,8 +94,8 @@ module DataDisplay =
             ]
             table(class' = CssClass.combine classes)
     
-    /// Timeline component
-    type timeline =
+    /// Timeline component - Event timeline
+    type Timeline =
         [<SolidComponent>]
         static member Invoke(?vertical: bool, ?horizontal: bool, ?compact: bool) =
             let classes = [

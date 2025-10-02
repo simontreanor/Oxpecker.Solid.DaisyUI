@@ -6,8 +6,8 @@ open Oxpecker.Solid
 /// DaisyUI Layout components
 module Layout =
     
-    /// Artboard component
-    type artboard =
+    /// Artboard component - Mobile device mockup
+    type Artboard =
         [<SolidComponent>]
         static member Invoke(?phone: bool, ?horizontal: bool) =
             let classes = [
@@ -17,8 +17,8 @@ module Layout =
             ]
             div(class' = CssClass.combine classes)
     
-    /// Divider component
-    type divider =
+    /// Divider component - Visual separator
+    type Divider =
         [<SolidComponent>]
         static member Invoke(?vertical: bool, ?horizontal: bool) =
             let classes = [
@@ -28,8 +28,8 @@ module Layout =
             ]
             div(class' = CssClass.combine classes)
     
-    /// Drawer component
-    type drawer =
+    /// Drawer component - Sidebar drawer
+    type Drawer =
         [<SolidComponent>]
         static member Invoke(?isEnd: bool) =
             let classes = [
@@ -38,8 +38,8 @@ module Layout =
             ]
             div(class' = CssClass.combine classes)
     
-    /// Footer component
-    type footer_layout =
+    /// Footer component (no conflict with PascalCase)
+    type Footer =
         [<SolidComponent>]
         static member Invoke(?center: bool) =
             let classes = [
@@ -48,8 +48,8 @@ module Layout =
             ]
             footer(class' = CssClass.combine classes)
     
-    /// Hero component
-    type hero =
+    /// Hero component - Hero section
+    type Hero =
         [<SolidComponent>]
         static member Invoke(?overlay: bool) =
             let classes = [
@@ -58,14 +58,14 @@ module Layout =
             ]
             div(class' = CssClass.combine classes)
     
-    /// Indicator component
-    type indicator =
+    /// Indicator component - Badge indicator
+    type Indicator =
         [<SolidComponent>]
         static member Invoke() =
             div(class' = "indicator")
     
-    /// Join component
-    type join =
+    /// Join component - Grouped elements
+    type Join =
         [<SolidComponent>]
         static member Invoke(?vertical: bool, ?horizontal: bool) =
             let classes = [
@@ -75,14 +75,14 @@ module Layout =
             ]
             div(class' = CssClass.combine classes)
     
-    /// Stack component
-    type stack =
+    /// Stack component - Stacked elements
+    type Stack =
         [<SolidComponent>]
         static member Invoke() =
             div(class' = "stack")
     
-    /// Toast component
-    type toast =
+    /// Toast component - Toast notification
+    type Toast =
         [<SolidComponent>]
         static member Invoke(?position: Position) =
             let classes = [

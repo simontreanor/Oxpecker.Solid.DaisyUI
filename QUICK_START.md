@@ -25,38 +25,38 @@ All DaisyUI components are available as standalone functions with optional param
 
 ```fsharp
 // Buttons - clean syntax with optional parameters
-btn(color = Primary, size = Large) { "Click me" }
-btn(outline = true) { "Outlined button" }
+Button(color = Primary, size = Large) { "Click me" }
+Button(outline = true) { "Outlined button" }
 
 // Cards
-card(bordered = true) {
-    cardBody() {
-        cardTitle() { "Card Title" }
+Card(bordered = true) {
+    CardBody() {
+        CardTitle() { "Card Title" }
         p() { "Card content goes here" }
     }
 }
 
 // Badges
-badge(color = Success) { "New" }
-badge(outline = true, size = Large) { "Badge" }
+Badge(color = Success) { "New" }
+Badge(outline = true, size = Large) { "Badge" }
 
 // Form inputs
-textInput(placeholder = "Enter name", bordered = true)
-checkbox(color = Primary)
-textarea_input(rows = 4, placeholder = "Message...")
+TextInput(placeholder = "Enter name", bordered = true)
+Checkbox(color = Primary)
+Textarea(rows = 4, placeholder = "Message...")
 ```
 
 ## Component Categories
 
 ### Actions
-- `btn` - Buttons with various styles
+- `Button` - Buttons with various styles
 - `dropdown` - Dropdown menus
 - `modal` - Modal dialogs
 - `swap` - Swap animations
 
 ### Data Display
-- `badge` - Status badges
-- `card`, `cardBody`, `cardTitle` - Card components
+- `Badge` - Status badges
+- `Card`, `cardBody`, `cardTitle` - Card components
 - `avatar` - Avatar images
 - `stats`, `stat` - Statistics display
 - `daisy_table` - Tables
@@ -117,8 +117,8 @@ type Size =
 
 ### Example Usage
 ```fsharp
-btn(color = Primary, size = Large) { "Large Primary Button" }
-badge(color = Success, size = Small) { "Success" }
+Button(color = Primary, size = Large) { "Large Primary Button" }
+Badge(color = Success, size = Small) { "Success" }
 ```
 
 ## Complete Example
@@ -127,29 +127,29 @@ badge(color = Success, size = Small) { "Success" }
 [<SolidComponent>]
 let MyApp() =
     div().class'("min-h-screen bg-base-200") {
-        navbar() {
+        Navbar() {
             div().class'("flex-1") {
                 a().class'("btn btn-ghost text-xl") { "My App" }
             }
         }
         
-        hero() {
+        Hero() {
             div().class'("hero-content text-center") {
                 div().class'("max-w-md") {
                     h1().class'("text-5xl font-bold") { "Welcome!" }
                     p().class'("py-6") { "Get started with DaisyUI" }
-                    btn(color = Primary, size = Large) { "Get Started" }
+                    Button(color = Primary, size = Large) { "Get Started" }
                 }
             }
         }
         
         div().class'("container mx-auto p-4") {
-            card(bordered = true) {
-                cardBody() {
-                    cardTitle() { "Example Card" }
+            Card(bordered = true) {
+                CardBody() {
+                    CardTitle() { "Example Card" }
                     p() { "This demonstrates the clean API syntax" }
                     div().class'("card-actions justify-end") {
-                        btn(color = Primary) { "Action" }
+                        Button(color = Primary) { "Action" }
                     }
                 }
             }
@@ -162,22 +162,22 @@ let MyApp() =
 Instead of chaining methods on HTML elements:
 ```fsharp
 // ❌ Old verbose style
-div().card(bordered = true) { }
-button().btn(color = Primary) { }
-input().checkbox() { }
+div().Card(bordered = true) { }
+button().Button(color = Primary) { }
+input().Checkbox() { }
 ```
 
 Use the clean component syntax:
 ```fsharp
 // ✅ New clean style
-card(bordered = true) { }
-btn(color = Primary) { }
-checkbox() { }
+Card(bordered = true) { }
+Button(color = Primary) { }
+Checkbox() { }
 ```
 
 ## Why This Syntax?
 
-F# only allows optional parameters (`?param`) on type members, not on let-bound functions. To achieve clean syntax like `btn(color = Primary)`, we use F# types with static `Invoke` members:
+F# only allows optional parameters (`?param`) on type members, not on let-bound functions. To achieve clean syntax like `Button(color = Primary)`, we use F# types with static `Invoke` members:
 
 ```fsharp
 type btn =
@@ -187,7 +187,7 @@ type btn =
 ```
 
 This gives you the best of both worlds:
-- Clean, intuitive syntax: `btn(color = Primary)`
+- Clean, intuitive syntax: `Button(color = Primary)`
 - Full IntelliSense support with optional parameters
 - Type safety with compile-time checking
 

@@ -6,14 +6,14 @@ open Oxpecker.Solid
 /// DaisyUI Navigation components
 module Navigation =
     
-    /// Breadcrumbs component
-    type breadcrumbs =
+    /// Breadcrumbs component - Breadcrumb navigation
+    type Breadcrumbs =
         [<SolidComponent>]
         static member Invoke() =
             div(class' = "breadcrumbs")
     
     /// Bottom navigation component
-    type btmNav =
+    type BottomNav =
         [<SolidComponent>]
         static member Invoke(?size: Size) =
             let classes = [
@@ -22,8 +22,8 @@ module Navigation =
             ]
             div(class' = CssClass.combine classes)
     
-    /// Link component
-    type link =
+    /// Link component (no conflict with PascalCase)
+    type Link =
         [<SolidComponent>]
         static member Invoke(?color: ColorVariant, ?hover: bool) =
             let classes = [
@@ -43,8 +43,8 @@ module Navigation =
             ]
             a(class' = CssClass.combine classes)
     
-    /// Menu component
-    type menu =
+    /// Menu component - Menu list
+    type Menu =
         [<SolidComponent>]
         static member Invoke(?vertical: bool, ?horizontal: bool, ?size: Size) =
             let classes = [
@@ -55,14 +55,14 @@ module Navigation =
             ]
             ul(class' = CssClass.combine classes)
     
-    /// Navbar component
-    type navbar =
+    /// Navbar component - Navigation bar
+    type Navbar =
         [<SolidComponent>]
         static member Invoke() =
             div(class' = "navbar bg-base-100")
     
-    /// Steps component
-    type steps =
+    /// Steps component - Step indicator
+    type Steps =
         [<SolidComponent>]
         static member Invoke(?vertical: bool, ?horizontal: bool) =
             let classes = [
@@ -73,7 +73,7 @@ module Navigation =
             ul(class' = CssClass.combine classes)
     
     /// Step item component
-    type step =
+    type Step =
         [<SolidComponent>]
         static member Invoke(?color: ColorVariant) =
             let classes = [
@@ -91,8 +91,8 @@ module Navigation =
             ]
             li(class' = CssClass.combine classes)
     
-    /// Tabs component
-    type tabs =
+    /// Tabs component - Tab navigation
+    type Tabs =
         [<SolidComponent>]
         static member Invoke(?boxed: bool, ?lifted: bool, ?bordered: bool, ?size: Size) =
             let classes = [
@@ -105,7 +105,7 @@ module Navigation =
             div(class' = CssClass.combine classes)
     
     /// Tab item component
-    type tab =
+    type Tab =
         [<SolidComponent>]
         static member Invoke(?active: bool, ?disabled: bool) =
             let classes = [

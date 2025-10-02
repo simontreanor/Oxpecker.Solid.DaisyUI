@@ -6,8 +6,8 @@ open Oxpecker.Solid
 /// DaisyUI Feedback components
 module Feedback =
     
-    /// Alert component
-    type alert =
+    /// Alert component - Alert message
+    type Alert =
         [<SolidComponent>]
         static member Invoke(?color: ColorVariant) =
             let classes = [
@@ -23,7 +23,7 @@ module Feedback =
             div(class' = CssClass.combine classes)
     
     /// Loading spinner component
-    type loading =
+    type Loading =
         [<SolidComponent>]
         static member Invoke(?variant: string, ?size: Size, ?color: ColorVariant) =
             let classes = [
@@ -51,7 +51,7 @@ module Feedback =
             span(class' = CssClass.combine classes)
     
     /// Progress bar component
-    type progress_bar =
+    type Progress =
         [<SolidComponent>]
         static member Invoke(?color: ColorVariant) =
             let classes = [
@@ -61,7 +61,7 @@ module Feedback =
             progress(class' = CssClass.combine classes)
     
     /// Radial progress component
-    type radialProgress =
+    type RadialProgress =
         [<SolidComponent>]
         static member Invoke(value: int, ?color: ColorVariant, ?size: string) =
             let sizeValue = defaultArg size "12rem"
@@ -82,14 +82,14 @@ module Feedback =
                 .attr("role", "progressbar")
                 .style'($"--value:{value}; --size:{sizeValue}")
     
-    /// Skeleton component
-    type skeleton =
+    /// Skeleton component - Loading placeholder
+    type Skeleton =
         [<SolidComponent>]
         static member Invoke() =
             div(class' = "skeleton")
     
     /// Tooltip component
-    type tooltip =
+    type Tooltip =
         [<SolidComponent>]
         static member Invoke(?position: Position, ?color: ColorVariant, ?isOpen: bool) =
             let classes = [

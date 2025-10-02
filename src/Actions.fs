@@ -6,8 +6,8 @@ open Oxpecker.Solid
 /// DaisyUI Action components
 module Actions =
     
-    /// Button builder  
-    type btn =
+    /// Button component - Primary action element
+    type Button =
         /// Invoke to create a DaisyUI button
         [<SolidComponent>]
         static member Invoke(?color: ColorVariant, ?size: Size, ?outline: bool, ?wide: bool,

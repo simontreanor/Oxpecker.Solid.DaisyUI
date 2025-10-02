@@ -65,13 +65,13 @@ open Oxpecker.Solid.DaisyUI
 let App() =
     div().class'("container mx-auto p-4") {
         // DaisyUI Card with Button - Clean syntax!
-        card(bordered = true) {
-            cardBody() {
-                cardTitle() { "Welcome to DaisyUI!" }
+        Card(bordered = true) {
+            CardBody() {
+                CardTitle() { "Welcome to DaisyUI!" }
                 p() { "This is a card component built with Oxpecker.Solid.DaisyUI" }
                 
                 // Clean button syntax with optional parameters
-                btn(color = Primary, size = Large) {
+                Button(color = Primary, size = Large) {
                     "Click Me!"
                 }
             }
@@ -90,13 +90,13 @@ Oxpecker.Solid.DaisyUI uses a unique approach for clean, intuitive syntax:
 
 ```fsharp
 // ✅ Clean syntax - components as functions
-btn(color = Primary) { "Click" }
-card(bordered = true) { ... }
-badge(color = Success) { "New" }
+Button(color = Primary) { "Click" }
+Card(bordered = true) { ... }
+Badge(color = Success) { "New" }
 
 // ❌ Not the verbose chaining style
-button().btn(color = Primary) { "Click" }
-div().card(bordered = true) { ... }
+button().Button(color = Primary) { "Click" }
+div().Card(bordered = true) { ... }
 ```
 
 This is achieved using F# types with static `Invoke` members, giving you:
@@ -109,7 +109,7 @@ This is achieved using F# types with static `Invoke` members, giving you:
 
 ### Actions
 Interactive components with clean syntax:
-- **btn** - Buttons with various styles and colors
+- **Button** - Buttons with various styles and colors
 - **dropdown** - Dropdown menus
 - **modal** - Modal dialogs
 - **swap** - Swap/toggle animations
@@ -117,8 +117,8 @@ Interactive components with clean syntax:
 
 ### Data Display
 Components for showing data:
-- **badge** - Small status indicators
-- **card** - Content containers
+- **Badge** - Small status indicators
+- **Card** - Content containers
 - **cardTitle** - Card titles
 - **cardBody** - Card body sections
 - **avatar** - User profile images
@@ -180,7 +180,7 @@ open Oxpecker.Solid.DaisyUI
 
 [<SolidComponent>]
 let MyButton() =
-    btn(color = Primary, size = Large, wide = true) {
+    Button(color = Primary, size = Large, wide = true) {
         "Large Primary Button"
     }
 ```
@@ -197,7 +197,7 @@ let MyModal() =
     
     Fragment() {
         // Trigger button
-        btn(color = Primary).onClick(fun _ -> setIsOpen(not (isOpen()))) {
+        Button(color = Primary).onClick(fun _ -> setIsOpen(not (isOpen()))) {
             "Open Modal"
         }
         
@@ -208,7 +208,7 @@ let MyModal() =
                     h3().class'("font-bold text-lg") { "Hello!" }
                     p().class'("py-4") { "This is a modal dialog" }
                     div().class'("modal-action") {
-                        btn().onClick(fun _ -> setIsOpen(false)) {
+                        Button().onClick(fun _ -> setIsOpen(false)) {
                             "Close"
                         }
                     }
@@ -225,17 +225,17 @@ open Oxpecker.Solid.DaisyUI
 
 [<SolidComponent>]
 let StatsCard() =
-    card(bordered = true) {
-        cardBody() {
-            cardTitle() { "Statistics" }
+    Card(bordered = true) {
+        CardBody() {
+            CardTitle() { "Statistics" }
             
-            stats() {
-                stat() {
+            Stats() {
+                Stat() {
                     div().class'("stat-title") { "Total Users" }
                     div().class'("stat-value") { "25.6K" }
                     div().class'("stat-desc") { "↗︎ 400 (22%)" }
                 }
-                stat() {
+                Stat() {
                     div().class'("stat-title") { "Page Views" }
                     div().class'("stat-value") { "2.6M" }
                     div().class'("stat-desc") { "↗︎ 90 (14%)" }
@@ -281,7 +281,7 @@ let MyForm() =
             }
         }
         
-        btn(color = Primary, block = true) {
+        Button(color = Primary, block = true) {
             "Submit"
         }
     }
@@ -347,16 +347,16 @@ let LoadingExample() =
     let progress, setProgress = createSignal 0
     
     div() {
-        Show(when' = loading()) {
+        Show(when' = Loading()) {
             Loading()
         }
         
-        Progress (progress()) 100
+        Progress (Progress()) 100
         
         let btn = DaisyButton()
         btn.render <| button(onClick = fun _ ->
-            setLoading(not (loading()))
-            setProgress(progress() + 10)
+            setLoading(not (Loading()))
+            setProgress(Progress() + 10)
         ) {
             "Toggle & Increment"
         }
