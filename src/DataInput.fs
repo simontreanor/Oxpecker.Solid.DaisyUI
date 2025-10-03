@@ -57,7 +57,7 @@ module DataInput =
     /// Checkbox component - Checkbox input
     type Checkbox =
         [<SolidComponent>]
-        static member Invoke(?class': string, ?color: ColorVariant, ?size: Size) =
+        static member Invoke(?class': string, ?color: Color, ?size: Size) =
             let classes = [
                 "checkbox"
                 if color.IsSome then
@@ -73,7 +73,7 @@ module DataInput =
     /// Radio button component
     type Radio =
         [<SolidComponent>]
-        static member Invoke(?class': string, ?name: string, ?color: ColorVariant, ?size: Size) =
+        static member Invoke(?class': string, ?name: string, ?color: Color, ?size: Size) =
             let classes = [
                 "radio"
                 if color.IsSome then
@@ -95,7 +95,7 @@ module DataInput =
     type TextInput =
         [<SolidComponent>]
         static member Invoke
-            (?class': string, ?placeholder: string, ?bordered: bool, ?ghost: bool, ?color: ColorVariant, ?size: Size)
+            (?class': string, ?placeholder: string, ?bordered: bool, ?ghost: bool, ?color: Color, ?size: Size)
             =
             let classes = [
                 "input"
@@ -127,7 +127,7 @@ module DataInput =
                 ?placeholder: string,
                 ?bordered: bool,
                 ?ghost: bool,
-                ?color: ColorVariant,
+                ?color: Color,
                 ?size: Size,
                 ?rows: int
             ) =
@@ -163,7 +163,7 @@ module DataInput =
     /// Select component (no conflict with PascalCase)
     type Select =
         [<SolidComponent>]
-        static member Invoke(?class': string, ?bordered: bool, ?ghost: bool, ?color: ColorVariant, ?size: Size) =
+        static member Invoke(?class': string, ?bordered: bool, ?ghost: bool, ?color: Color, ?size: Size) =
             let classes = [
                 "select"
                 if bordered = Some true then
@@ -183,7 +183,7 @@ module DataInput =
     /// Range slider component
     type Range =
         [<SolidComponent>]
-        static member Invoke(?class': string, ?min: int, ?max: int, ?step: int, ?color: ColorVariant, ?size: Size) =
+        static member Invoke(?class': string, ?min: int, ?max: int, ?step: int, ?color: Color, ?size: Size) =
             let classes = [
                 "range"
                 if color.IsSome then
@@ -219,7 +219,7 @@ module DataInput =
     /// Toggle switch component
     type Toggle =
         [<SolidComponent>]
-        static member Invoke(?class': string, ?color: ColorVariant, ?size: Size) =
+        static member Invoke(?class': string, ?color: Color, ?size: Size) =
             let classes = [
                 "toggle"
                 if color.IsSome then
@@ -235,7 +235,7 @@ module DataInput =
     /// File input component
     type FileInput =
         [<SolidComponent>]
-        static member Invoke(?class': string, ?bordered: bool, ?ghost: bool, ?color: ColorVariant, ?size: Size) =
+        static member Invoke(?class': string, ?bordered: bool, ?ghost: bool, ?color: Color, ?size: Size) =
             let classes = [
                 "file-input"
                 if bordered = Some true then

@@ -35,21 +35,21 @@ module Navigation =
     /// Link component (no conflict with PascalCase)
     type Link =
         [<SolidComponent>]
-        static member Invoke(?class': string, ?color: ColorVariant, ?hover: bool) =
+        static member Invoke(?class': string, ?color: Color, ?hover: bool) =
             let classes = [
                 "link"
                 if hover = Some true then
                     "link-hover"
                 if color.IsSome then
                     match color.Value with
-                    | Primary -> "link-primary"
-                    | Secondary -> "link-secondary"
-                    | Accent -> "link-accent"
-                    | Neutral -> "link-neutral"
-                    | Success -> "link-success"
-                    | Info -> "link-info"
-                    | Warning -> "link-warning"
-                    | Error -> "link-error"
+                    | Color.Primary -> "link-primary"
+                    | Color.Secondary -> "link-secondary"
+                    | Color.Accent -> "link-accent"
+                    | Color.Neutral -> "link-neutral"
+                    | Color.Success -> "link-success"
+                    | Color.Info -> "link-info"
+                    | Color.Warning -> "link-warning"
+                    | Color.Error -> "link-error"
                     | _ -> ""
                 if class'.IsSome then
                     class'.Value
@@ -106,18 +106,18 @@ module Navigation =
     /// Step item component
     type Step =
         [<SolidComponent>]
-        static member Invoke(?class': string, ?color: ColorVariant) =
+        static member Invoke(?class': string, ?color: Color) =
             let classes = [
                 "step"
                 if color.IsSome then
                     match color.Value with
-                    | Primary -> "step-primary"
-                    | Secondary -> "step-secondary"
-                    | Accent -> "step-accent"
-                    | Info -> "step-info"
-                    | Success -> "step-success"
-                    | Warning -> "step-warning"
-                    | Error -> "step-error"
+                    | Color.Primary -> "step-primary"
+                    | Color.Secondary -> "step-secondary"
+                    | Color.Accent -> "step-accent"
+                    | Color.Info -> "step-info"
+                    | Color.Success -> "step-success"
+                    | Color.Warning -> "step-warning"
+                    | Color.Error -> "step-error"
                     | _ -> ""
                 if class'.IsSome then
                     class'.Value

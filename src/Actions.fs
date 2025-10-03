@@ -12,7 +12,7 @@ module Actions =
         static member Invoke
             (
                 ?class': string,
-                ?color: ColorVariant,
+                ?color: Color,
                 ?size: Size,
                 ?outline: bool,
                 ?wide: bool,

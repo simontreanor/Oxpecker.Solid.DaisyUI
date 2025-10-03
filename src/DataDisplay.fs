@@ -9,7 +9,7 @@ module DataDisplay =
     /// Badge component - Small status indicator
     type Badge =
         [<SolidComponent>]
-        static member Invoke(?class': string, ?color: ColorVariant, ?size: Size, ?outline: bool) =
+        static member Invoke(?class': string, ?color: Color, ?size: Size, ?outline: bool) =
             let classes = [
                 "badge"
                 if outline = Some true then
@@ -28,7 +28,7 @@ module DataDisplay =
     type Card =
         [<SolidComponent>]
         static member Invoke
-            (?class': string, ?bordered: bool, ?imageFull: bool, ?color: ColorVariant, ?compact: bool, ?side: bool)
+            (?class': string, ?bordered: bool, ?imageFull: bool, ?color: Color, ?compact: bool, ?side: bool)
             =
             let classes = [
                 "card"
@@ -42,10 +42,10 @@ module DataDisplay =
                     "card-side"
                 if color.IsSome then
                     match color.Value with
-                    | Primary -> "bg-primary text-primary-content"
-                    | Secondary -> "bg-secondary text-secondary-content"
-                    | Accent -> "bg-accent text-accent-content"
-                    | Neutral -> "bg-neutral text-neutral-content"
+                    | Color.Primary -> "bg-primary text-primary-content"
+                    | Color.Secondary -> "bg-secondary text-secondary-content"
+                    | Color.Accent -> "bg-accent text-accent-content"
+                    | Color.Neutral -> "bg-neutral text-neutral-content"
                     | _ -> ""
                 if class'.IsSome then
                     class'.Value
@@ -288,7 +288,7 @@ module DataDisplay =
     /// Chat bubble component - The actual chat message bubble
     type ChatBubble =
         [<SolidComponent>]
-        static member Invoke(?class': string, ?color: ColorVariant) =
+        static member Invoke(?class': string, ?color: Color) =
             let classes = [
                 "chat-bubble"
                 if color.IsSome then

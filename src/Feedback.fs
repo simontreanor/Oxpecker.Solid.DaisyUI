@@ -9,15 +9,15 @@ module Feedback =
     /// Alert component - Alert message
     type Alert =
         [<SolidComponent>]
-        static member Invoke(?class': string, ?color: ColorVariant) =
+        static member Invoke(?class': string, ?color: Color) =
             let classes = [
                 "alert"
                 if color.IsSome then
                     match color.Value with
-                    | Info -> "alert-info"
-                    | Success -> "alert-success"
-                    | Warning -> "alert-warning"
-                    | Error -> "alert-error"
+                    | Color.Info -> "alert-info"
+                    | Color.Success -> "alert-success"
+                    | Color.Warning -> "alert-warning"
+                    | Color.Error -> "alert-error"
                     | _ -> ""
                 if class'.IsSome then
                     class'.Value
@@ -28,7 +28,7 @@ module Feedback =
     /// Loading spinner component
     type Loading =
         [<SolidComponent>]
-        static member Invoke(?class': string, ?variant: string, ?size: Size, ?color: ColorVariant) =
+        static member Invoke(?class': string, ?variant: string, ?size: Size, ?color: Color) =
             let classes = [
                 "loading"
                 match variant with
@@ -43,13 +43,13 @@ module Feedback =
                     CssClass.ofSize "loading" size.Value
                 if color.IsSome then
                     match color.Value with
-                    | Primary -> "text-primary"
-                    | Secondary -> "text-secondary"
-                    | Accent -> "text-accent"
-                    | Info -> "text-info"
-                    | Success -> "text-success"
-                    | Warning -> "text-warning"
-                    | Error -> "text-error"
+                    | Color.Primary -> "text-primary"
+                    | Color.Secondary -> "text-secondary"
+                    | Color.Accent -> "text-accent"
+                    | Color.Info -> "text-info"
+                    | Color.Success -> "text-success"
+                    | Color.Warning -> "text-warning"
+                    | Color.Error -> "text-error"
                     | _ -> ""
                 if class'.IsSome then
                     class'.Value
@@ -60,7 +60,7 @@ module Feedback =
     /// Progress bar component
     type Progress =
         [<SolidComponent>]
-        static member Invoke(?class': string, ?color: ColorVariant) =
+        static member Invoke(?class': string, ?color: Color) =
             let classes = [
                 "progress"
                 if color.IsSome then
@@ -74,20 +74,20 @@ module Feedback =
     /// Radial progress component
     type RadialProgress =
         [<SolidComponent>]
-        static member Invoke(value: int, ?class': string, ?color: ColorVariant, ?size: string) =
+        static member Invoke(value: int, ?class': string, ?color: Color, ?size: string) =
             let sizeValue = defaultArg size "12rem"
 
             let classes = [
                 "radial-progress"
                 if color.IsSome then
                     match color.Value with
-                    | Primary -> "text-primary"
-                    | Secondary -> "text-secondary"
-                    | Accent -> "text-accent"
-                    | Info -> "text-info"
-                    | Success -> "text-success"
-                    | Warning -> "text-warning"
-                    | Error -> "text-error"
+                    | Color.Primary -> "text-primary"
+                    | Color.Secondary -> "text-secondary"
+                    | Color.Accent -> "text-accent"
+                    | Color.Info -> "text-info"
+                    | Color.Success -> "text-success"
+                    | Color.Warning -> "text-warning"
+                    | Color.Error -> "text-error"
                     | _ -> ""
                 if class'.IsSome then
                     class'.Value
@@ -112,7 +112,7 @@ module Feedback =
     /// Tooltip component
     type Tooltip =
         [<SolidComponent>]
-        static member Invoke(?class': string, ?position: Position, ?color: ColorVariant, ?isOpen: bool) =
+        static member Invoke(?class': string, ?position: Position, ?color: Color, ?isOpen: bool) =
             let classes = [
                 "tooltip"
                 if position.IsSome then

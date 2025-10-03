@@ -1,7 +1,8 @@
 namespace Oxpecker.Solid.DaisyUI
 
 /// Color variants for DaisyUI components
-type ColorVariant =
+[<RequireQualifiedAccess>]
+type Color =
     | Primary
     | Secondary
     | Accent
@@ -72,17 +73,17 @@ module CssClass =
         |> String.concat " "
 
     /// Convert ColorVariant to CSS class with prefix
-    let ofColorVariant (prefix: string) (variant: ColorVariant) =
+    let ofColorVariant (prefix: string) (variant: Color) =
         match variant with
-        | Primary -> $"{prefix}-primary"
-        | Secondary -> $"{prefix}-secondary"
-        | Accent -> $"{prefix}-accent"
-        | Neutral -> $"{prefix}-neutral"
-        | Info -> $"{prefix}-info"
-        | Success -> $"{prefix}-success"
-        | Warning -> $"{prefix}-warning"
-        | Error -> $"{prefix}-error"
-        | ColorVariant.Ghost -> $"{prefix}-ghost"
+        | Color.Primary -> $"{prefix}-primary"
+        | Color.Secondary -> $"{prefix}-secondary"
+        | Color.Accent -> $"{prefix}-accent"
+        | Color.Neutral -> $"{prefix}-neutral"
+        | Color.Info -> $"{prefix}-info"
+        | Color.Success -> $"{prefix}-success"
+        | Color.Warning -> $"{prefix}-warning"
+        | Color.Error -> $"{prefix}-error"
+        | Color.Ghost -> $"{prefix}-ghost"
 
     /// Convert Size to CSS class with prefix
     let ofSize (prefix: string) (size: Size) =
